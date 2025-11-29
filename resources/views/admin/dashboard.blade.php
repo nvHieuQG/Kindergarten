@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Dashboard')
-@section('page-title', 'Dashboard')
+@section('title', 'Bảng điều khiển')
+@section('page-title', 'Bảng điều khiển')
 
 @section('content')
 <div class="row g-4 mb-4">
@@ -10,10 +10,10 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Total Posts</div>
+                    <div class="text-muted small mb-1">Tổng số bài viết</div>
                     <h3 class="mb-0">{{ $stats['total_posts'] }}</h3>
                     <small class="text-success">
-                        <i class="fas fa-check-circle"></i> {{ $stats['published_posts'] }} published
+                        <i class="fas fa-check-circle"></i> {{ $stats['published_posts'] }} đã xuất bản
                     </small>
                 </div>
                 <div class="stat-icon bg-primary bg-opacity-10 text-primary">
@@ -28,10 +28,10 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Total Teachers</div>
+                    <div class="text-muted small mb-1">Tổng số giáo viên</div>
                     <h3 class="mb-0">{{ $stats['total_teachers'] }}</h3>
                     <small class="text-success">
-                        <i class="fas fa-check-circle"></i> {{ $stats['active_teachers'] }} active
+                        <i class="fas fa-check-circle"></i> {{ $stats['active_teachers'] }} đang hoạt động
                     </small>
                 </div>
                 <div class="stat-icon bg-success bg-opacity-10 text-success">
@@ -46,10 +46,10 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Total Events</div>
+                    <div class="text-muted small mb-1">Tổng số sự kiện</div>
                     <h3 class="mb-0">{{ $stats['total_events'] }}</h3>
                     <small class="text-info">
-                        <i class="fas fa-calendar-alt"></i> {{ $stats['upcoming_events'] }} upcoming
+                        <i class="fas fa-calendar-alt"></i> {{ $stats['upcoming_events'] }} sắp tới
                     </small>
                 </div>
                 <div class="stat-icon bg-info bg-opacity-10 text-info">
@@ -64,10 +64,10 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Enrollments</div>
+                    <div class="text-muted small mb-1">Tuyển sinh</div>
                     <h3 class="mb-0">{{ $stats['total_enrollments'] }}</h3>
                     <small class="text-warning">
-                        <i class="fas fa-clock"></i> {{ $stats['pending_enrollments'] }} pending
+                        <i class="fas fa-clock"></i> {{ $stats['pending_enrollments'] }} đang chờ
                     </small>
                 </div>
                 <div class="stat-icon bg-warning bg-opacity-10 text-warning">
@@ -84,10 +84,10 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Contacts</div>
+                    <div class="text-muted small mb-1">Liên hệ</div>
                     <h3 class="mb-0">{{ $stats['total_contacts'] }}</h3>
                     <small class="text-danger">
-                        <i class="fas fa-envelope"></i> {{ $stats['unread_contacts'] }} unread
+                        <i class="fas fa-envelope"></i> {{ $stats['unread_contacts'] }} chưa đọc
                     </small>
                 </div>
                 <div class="stat-icon bg-danger bg-opacity-10 text-danger">
@@ -102,10 +102,10 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Comments</div>
+                    <div class="text-muted small mb-1">Bình luận</div>
                     <h3 class="mb-0">{{ $stats['total_comments'] }}</h3>
                     <small class="text-warning">
-                        <i class="fas fa-clock"></i> {{ $stats['pending_comments'] }} pending
+                        <i class="fas fa-clock"></i> {{ $stats['pending_comments'] }} đang chờ
                     </small>
                 </div>
                 <div class="stat-icon bg-secondary bg-opacity-10 text-secondary">
@@ -119,9 +119,9 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Quick Actions</div>
+                    <div class="text-muted small mb-1">Thao tác nhanh</div>
                     <a href="{{ route('admin.posts.create') }}" class="btn btn-primary btn-sm mt-2">
-                        <i class="fas fa-plus"></i> New Post
+                        <i class="fas fa-plus"></i> Bài viết mới
                     </a>
                 </div>
                 <div class="stat-icon bg-primary bg-opacity-10 text-primary">
@@ -135,9 +135,9 @@
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted small mb-1">Website</div>
+                    <div class="text-muted small mb-1">Trang web</div>
                     <a href="{{ route('home') }}" class="btn btn-outline-primary btn-sm mt-2" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> View Site
+                        <i class="fas fa-external-link-alt"></i> Xem trang web
                     </a>
                 </div>
                 <div class="stat-icon bg-success bg-opacity-10 text-success">
@@ -154,16 +154,16 @@
     <div class="col-lg-6">
         <div class="card shadow-sm">
             <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-newspaper me-2 text-primary"></i>Recent Posts</h6>
+                <h6 class="mb-0"><i class="fas fa-newspaper me-2 text-primary"></i>Bài viết gần đây</h6>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Title</th>
-                                <th>Status</th>
-                                <th>Date</th>
+                                <th>Tiêu đề</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -185,7 +185,7 @@
                             <tr>
                                 <td colspan="3" class="text-center py-4 text-muted">
                                     <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                                    No posts yet
+                                    Chưa có bài viết nào
                                 </td>
                             </tr>
                             @endforelse
@@ -195,7 +195,7 @@
             </div>
             @if($recentPosts->count() > 0)
             <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.posts.index') }}" class="text-decoration-none">View All Posts <i class="fas fa-arrow-right ms-1"></i></a>
+                <a href="{{ route('admin.posts.index') }}" class="text-decoration-none">Xem tất cả bài viết <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
             @endif
         </div>
@@ -205,16 +205,16 @@
     <div class="col-lg-6">
         <div class="card shadow-sm">
             <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-user-plus me-2 text-warning"></i>Recent Enrollments</h6>
+                <h6 class="mb-0"><i class="fas fa-user-plus me-2 text-warning"></i>Tuyển sinh gần đây</h6>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Child Name</th>
-                                <th>Parent</th>
-                                <th>Status</th>
+                                <th>Tên trẻ</th>
+                                <th>Phụ huynh</th>
+                                <th>Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -241,7 +241,7 @@
                             <tr>
                                 <td colspan="3" class="text-center py-4 text-muted">
                                     <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                                    No enrollments yet
+                                    Chưa có đơn tuyển sinh nào
                                 </td>
                             </tr>
                             @endforelse
@@ -251,7 +251,7 @@
             </div>
             @if($recentEnrollments->count() > 0)
             <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.enrollments.index') }}" class="text-decoration-none">View All Enrollments <i class="fas fa-arrow-right ms-1"></i></a>
+                <a href="{{ route('admin.enrollments.index') }}" class="text-decoration-none">Xem tất cả đơn tuyển sinh <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
             @endif
         </div>
@@ -263,7 +263,7 @@
     <div class="col-lg-6">
         <div class="card shadow-sm">
             <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-envelope me-2 text-danger"></i>Recent Contacts</h6>
+                <h6 class="mb-0"><i class="fas fa-envelope me-2 text-danger"></i>Liên hệ gần đây</h6>
             </div>
             <div class="card-body p-0">
                 <div class="list-group list-group-flush">
@@ -280,14 +280,14 @@
                     @empty
                     <div class="list-group-item text-center py-4 text-muted">
                         <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                        No contacts yet
+                        Chưa có liên hệ nào
                     </div>
                     @endforelse
                 </div>
             </div>
             @if($recentContacts->count() > 0)
             <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.contacts.index') }}" class="text-decoration-none">View All Contacts <i class="fas fa-arrow-right ms-1"></i></a>
+                <a href="{{ route('admin.contacts.index') }}" class="text-decoration-none">Xem tất cả liên hệ <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
             @endif
         </div>
@@ -297,7 +297,7 @@
     <div class="col-lg-6">
         <div class="card shadow-sm">
             <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-comments me-2 text-warning"></i>Pending Comments</h6>
+                <h6 class="mb-0"><i class="fas fa-comments me-2 text-warning"></i>Bình luận đang chờ</h6>
             </div>
             <div class="card-body p-0">
                 <div class="list-group list-group-flush">
@@ -307,32 +307,32 @@
                             <h6 class="mb-1">{{ $comment->name }}</h6>
                             <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
                         </div>
-                        <p class="mb-1"><small>On: <strong>{{ $comment->post->title }}</strong></small></p>
+                        <p class="mb-1"><small>Trên bài: <strong>{{ $comment->post->title }}</strong></small></p>
                         <p class="mb-2">{{ Str::limit($comment->content, 80) }}</p>
                         <div>
                             <form method="POST" action="{{ route('admin.comments.approve', $comment) }}" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button class="btn btn-sm btn-success"><i class="fas fa-check"></i> Approve</button>
+                                <button class="btn btn-sm btn-success"><i class="fas fa-check"></i> Duyệt</button>
                             </form>
                             <form method="POST" action="{{ route('admin.comments.reject', $comment) }}" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button class="btn btn-sm btn-warning"><i class="fas fa-times"></i> Reject</button>
+                                <button class="btn btn-sm btn-warning"><i class="fas fa-times"></i> Từ chối</button>
                             </form>
                         </div>
                     </div>
                     @empty
                     <div class="list-group-item text-center py-4 text-muted">
                         <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                        No pending comments
+                        Không có bình luận đang chờ
                     </div>
                     @endforelse
                 </div>
             </div>
             @if($pendingComments->count() > 0)
             <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.comments.index') }}" class="text-decoration-none">View All Comments <i class="fas fa-arrow-right ms-1"></i></a>
+                <a href="{{ route('admin.comments.index') }}" class="text-decoration-none">Xem tất cả bình luận <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
             @endif
         </div>

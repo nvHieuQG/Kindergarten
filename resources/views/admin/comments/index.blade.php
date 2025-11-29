@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Comments Management')
-@section('page-title', 'Comments Management')
+@section('title', 'Quản lý bình luận')
+@section('page-title', 'Quản lý bình luận')
 
 @section('content')
 <div class="card shadow-sm">
@@ -10,11 +10,11 @@
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th style="width: 20%;">Author</th>
-                        <th style="width: 40%;">Comment</th>
-                        <th style="width: 20%;">On Post</th>
-                        <th style="width: 10%;">Status</th>
-                        <th style="width: 10%;">Actions</th>
+                        <th style="width: 20%;">Tác giả</th>
+                        <th style="width: 40%;">Bình luận</th>
+                        <th style="width: 20%;">Trên bài viết</th>
+                        <th style="width: 10%;">Trạng thái</th>
+                        <th style="width: 10%;">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,7 @@
                             <p class="mb-0 text-break">{{ Str::limit($comment->content, 100) }}</p>
                             @if(strlen($comment->content) > 100)
                                 <button type="button" class="btn btn-link btn-sm p-0" data-bs-toggle="modal" data-bs-target="#commentModal{{ $comment->id }}">
-                                    Read more
+                                    Đọc thêm
                                 </button>
                                 
                                 <!-- Modal -->
@@ -37,7 +37,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Comment by {{ $comment->name }}</h5>
+                                                <h5 class="modal-title">Bình luận bởi {{ $comment->name }}</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -54,7 +54,7 @@
                                     {{ Str::limit($comment->post->title, 30) }}
                                 </a>
                             @else
-                                <span class="text-muted">Deleted Post</span>
+                                <span class="text-muted">Bài viết đã xóa</span>
                             @endif
                         </td>
                         <td>
@@ -63,7 +63,10 @@
                                 @elseif($comment->status == 'pending') bg-warning
                                 @else bg-danger
                                 @endif">
-                                {{ ucfirst($comment->status) }}
+                                @if($comment->status == 'approved') Đã duyệt
+                                @elseif($comment->status == 'pending') Chờ duyệt
+                                @else Spam
+                                @endif
                             </span>
                         </td>
                         <td>
@@ -73,7 +76,7 @@
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="status" value="approved">
-                                    <button type="submit" class="btn btn-sm btn-success" title="Approve">
+                                    <button type="submit" class="btn btn-sm btn-success" title="Duyệt">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 </form>
@@ -84,16 +87,16 @@
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="status" value="spam">
-                                    <button type="submit" class="btn btn-sm btn-warning" title="Mark as Spam">
+                                    <button type="submit" class="btn btn-sm btn-warning" title="Đánh dấu Spam">
                                         <i class="fas fa-ban"></i>
                                     </button>
                                 </form>
                                 @endif
 
-                                <form action="{{ route('admin.comments.destroy', $comment) }}" method="POST" onsubmit="return confirm('Delete this comment?')">
+                                <form action="{{ route('admin.comments.destroy', $comment) }}" method="POST" onsubmit="return confirm('Xóa bình luận này?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                    <button type="submit" class="btn btn-sm btn-danger" title="Xóa">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -104,7 +107,7 @@
                     <tr>
                         <td colspan="5" class="text-center py-4 text-muted">
                             <i class="fas fa-comments fa-3x mb-3 d-block"></i>
-                            <p>No comments found.</p>
+                            <p>Không tìm thấy bình luận nào.</p>
                         </td>
                     </tr>
                     @endforelse

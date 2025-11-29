@@ -8,10 +8,10 @@
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-lg-7 col-md-12">
-                <h1 class="mb-3 text-primary">We Care Your Baby</h1>
-                <h1 class="mb-5 display-1 text-white">The Best Play Area For Your Kids</h1>
-                <a href="" class="btn btn-primary px-4 py-3 px-md-5  me-4 btn-border-radius">Get Started</a>
-                <a href="" class="btn btn-primary px-4 py-3 px-md-5 btn-border-radius">Learn More</a>
+                <h1 class="mb-3 text-primary">Chúng tôi chăm sóc bé yêu của bạn</h1>    
+                <h1 class="mb-5 display-1 text-white">Không gian vui chơi lý tưởng</h1>
+                <a href="" class="btn btn-primary px-4 py-3 px-md-5  me-4 btn-border-radius">Bắt đầu</a>
+                <a href="" class="btn btn-primary px-4 py-3 px-md-5 btn-border-radius">Tìm hiểu thêm</a>
             </div>
         </div>
     </div>
@@ -30,23 +30,23 @@
                 </div>
             </div>
             <div class="col-lg-7 wow fadeIn" data-wow-delay="0.3s">
-                <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">About Us</h4>
-                <h1 class="text-dark mb-4 display-5">We Learn Smart Way To Build Bright Futute For Your Children</h1>
-                <p class="text-dark mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
+                <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Về chúng tôi</h4>
+                <h1 class="text-dark mb-4 display-5">Chúng tôi đồng hành cùng bé học tập thông minh để xây dựng tương lai tươi sáng</h1>
+                <p class="text-dark mb-4">Tại Mầm non Hạo Hướng Dương, chúng tôi mang đến môi trường học tập thân thiện, an toàn và sáng tạo. Với chương trình giáo dục hiện đại và đội ngũ giáo viên giàu kinh nghiệm, trẻ được phát triển toàn diện cả về trí tuệ, cảm xúc và thể chất.
+Chúng tôi luôn nỗ lực tạo ra những trải nghiệm ý nghĩa nhất trong những năm tháng đầu đời của trẻ.</p>
                 <div class="row mb-4">
                     <div class="col-lg-6">
-                        <h6 class="mb-3"><i class="fas fa-check-circle me-2"></i>Sport Activites</h6>
-                        <h6 class="mb-3"><i class="fas fa-check-circle me-2 text-primary"></i>Outdoor Games</h6>
-                        <h6 class="mb-3"><i class="fas fa-check-circle me-2 text-secondary"></i>Nutritious Foods</h6>
+                        <h6 class="mb-3"><i class="fas fa-check-circle me-2"></i>Thể thao</h6>
+                        <h6 class="mb-3"><i class="fas fa-check-circle me-2 text-primary"></i>Trò chơi ngoài trời phong phú</h6>
+                        <h6 class="mb-3"><i class="fas fa-check-circle me-2 text-secondary"></i>Thức ăn lành mạnh</h6>
                     </div>
                     <div class="col-lg-6">
-                        <h6 class="mb-3"><i class="fas fa-check-circle me-2"></i>Highly Secured</h6>
-                        <h6 class="mb-3"><i class="fas fa-check-circle me-2 text-primary"></i>Friendly Environment</h6>
-                        <h6><i class="fas fa-check-circle me-2 text-secondary"></i>Qualified Teacher</h6>
+                        <h6 class="mb-3"><i class="fas fa-check-circle me-2"></i>Cơ sở vật chất an toàn, bảo mật</h6>
+                        <h6 class="mb-3"><i class="fas fa-check-circle me-2 text-primary"></i>Trường học thân thiện</h6>
+                        <h6><i class="fas fa-check-circle me-2 text-secondary"></i>Đội ngũ giáo viên giàu kinh nghiệm</h6>
                     </div>
                 </div>
-                <a href="" class="btn btn-primary px-5 py-3 btn-border-radius">More Details</a>
+                <a href="" class="btn btn-primary px-5 py-3 btn-border-radius">Chi tiết</a>
             </div>
         </div>
     </div>
@@ -76,8 +76,8 @@
 <div class="container-fluid service py-5">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">What We Do</h4>
-            <h1 class="mb-5 display-3">Thanks To Get Started With Our School</h1>
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Chúng tôi làm gì</h4>
+            <h1 class="mb-5 display-3">Khởi đầu hành trình học tập và phát triển toàn diện dành cho các bé với môi trường thân thiện, sáng tạo và an toàn.</h1>
         </div>
         <div class="row g-5">
             <div class="col-md-6 col-lg-6 col-xl-3 wow fadeIn" data-wow-delay="0.1s">
@@ -85,10 +85,9 @@
                     <div class="service-content d-flex align-items-center justify-content-center p-4">
                         <div class="service-content-inner">
                             <div class="p-4"><i class="fas fa-gamepad fa-6x text-primary"></i></div>
-                            <a href="#" class="h4">Study & Game</a>
-                            <p class="my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, culpa qui officiis animi Lorem ipsum dolor sit amet, 
-                                consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Read More</a>
+                            <a href="#" class="h4">Học & Chơi</a>
+                            <p class="my-3">Chương trình học được thiết kế sinh động, kết hợp giữa học và chơi để giúp trẻ tiếp thu kiến thức tự nhiên, phát triển tư duy và kỹ năng xã hội thông qua các trò chơi giáo dục.</p>
+                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Đọc thêm</a>
                         </div>
                     </div>
                 </div>
@@ -98,10 +97,9 @@
                     <div class="service-content d-flex align-items-center justify-content-center p-4">
                         <div class="service-content-inner">
                             <div class="p-4"><i class="fas fa-sort-alpha-down fa-6x text-primary"></i></div>
-                            <a href="#" class="h4">A to Z Programs</a>
-                            <p class="my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, culpa qui officiis animi Lorem ipsum dolor sit amet, 
-                                consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Read More</a>
+                            <a href="#" class="h4">Chương trình A đến Z</a>
+                            <p class="my-3">Hệ thống chương trình từ A đến Z, bao gồm học tập, thể chất, nghệ thuật và khám phá khoa học – giúp trẻ phát triển đầy đủ về trí tuệ lẫn cảm xúc.</p>
+                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Đọc thêm</a>
                         </div>
                     </div>
                 </div>
@@ -111,10 +109,9 @@
                     <div class="service-content d-flex align-items-center justify-content-center p-4">
                         <div class="service-content-inner">
                             <div class="p-4"><i class="fas fa-users fa-6x text-primary"></i></div>
-                            <a href="#" class="h4">Expert Teacher</a>
-                            <p class="my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, culpa qui officiis animi Lorem ipsum dolor sit amet, 
-                                consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Read More</a>
+                            <a href="#" class="h4">Giáo viên chuyên nghiệp</a>
+                            <p class="my-3">Đội ngũ giáo viên giàu kinh nghiệm, tận tâm và yêu trẻ. Mỗi cô giáo là một người đồng hành, hướng dẫn và tạo cảm hứng học tập cho các bé mỗi ngày.</p>
+                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Đọc thêm</a>
                         </div>
                     </div>
                 </div>
@@ -124,10 +121,9 @@
                     <div class="service-content d-flex align-items-center justify-content-center p-4">
                         <div class="service-content-inner">
                             <div class="p-4"><i class="fas fa-user-nurse fa-6x text-primary"></i></div>
-                            <a href="#" class="h4">Mental Health</a>
-                            <p class="my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, culpa qui officiis animi Lorem ipsum dolor sit amet, 
-                                consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Read More</a>
+                            <a href="#" class="h4">Sức khỏe tinh thần</a>
+                            <p class="my-3">Chúng tôi đặc biệt chú trọng sức khỏe tinh thần của trẻ. Các hoạt động trải nghiệm, giao tiếp và thư giãn giúp trẻ hình thành sự tự tin, cảm xúc tích cực và khả năng thích ứng tốt.</p>
+                            <a href="#" class="btn btn-primary text-white px-4 py-2 my-2 btn-border-radius">Đọc thêm</a>
                         </div>
                     </div>
                 </div>
@@ -141,8 +137,8 @@
 <div class="container-fluid program  py-5">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Our Programs</h4>
-            <h1 class="mb-5 display-3">We Offer An Exclusive Program For Kids</h1>
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Chương trình của chúng tôi</h4>
+            <h1 class="mb-5 display-3">Bài Viết Nổi Bật</h1>
         </div>
         <div class="row g-5 justify-content-center">
             <div class="col-md-6 col-lg-6 col-xl-4 wow fadeIn" data-wow-delay="0.1s">
@@ -155,7 +151,7 @@
                     </div>
                     <div class="program-text bg-white px-4 pb-3">
                         <div class="program-text-inner">
-                            <a href="#" class="h4">English For Today</a>
+                            <a href="#" class="h4">Tiếng Anh cho hôm nay</a>
                             <p class="mt-3 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed purus consectetur,</p>
                         </div>
                     </div>
@@ -163,13 +159,13 @@
                         <img src="{{ asset('assets/img/program-teacher.jpg') }}" class="img-fluid rounded-circle p-2 border border-primary bg-white" alt="Image" style="width: 70px; height: 70px;">
                         <div class="ms-3">
                             <h6 class="mb-0 text-primary">Mary Mordern</h6>
-                            <small>Arts Designer</small>
+                            <small>Giáo viên nghệ thuật</small>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between px-4 py-2 bg-primary rounded-bottom">
-                        <small class="text-white"><i class="fas fa-wheelchair me-1"></i> 30 Sits</small>
-                        <small class="text-white"><i class="fas fa-book me-1"></i> 11 Lessons</small>
-                        <small class="text-white"><i class="fas fa-clock me-1"></i> 60 Hours</small>
+                        <small class="text-white"><i class="fas fa-wheelchair me-1"></i> 30 Chỗ</small>
+                        <small class="text-white"><i class="fas fa-book me-1"></i> 11 Bài học</small>
+                        <small class="text-white"><i class="fas fa-clock me-1"></i> 60 Giờ</small>
                     </div>
                 </div>
             </div>
@@ -183,7 +179,7 @@
                     </div>
                     <div class="program-text bg-white px-4 pb-3">
                         <div class="program-text-inner">
-                            <a href="#" class="h4">Graphics Arts</a>
+                            <a href="#" class="h4">Nghệ thuật đồ họa</a>
                             <p class="mt-3 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed purus consectetur,</p>
                         </div>
                     </div>
@@ -191,7 +187,7 @@
                         <img src="{{ asset('assets/img/program-teacher.jpg') }}" class="img-fluid rounded-circle p-2 border border-primary bg-white" alt="" style="width: 70px; height: 70px;">
                         <div class="ms-3">
                             <h6 class="mb-0 text-primary">Mary Mordern</h6>
-                            <small>Arts Designer</small>
+                            <small>Giáo viên nghệ thuật</small>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between px-4 py-2 bg-primary rounded-bottom">
@@ -211,7 +207,7 @@
                     </div>
                     <div class="program-text bg-white px-4 pb-3">
                         <div class="program-text-inner">
-                            <a href="#" class="h4">General Science</a>
+                            <a href="#" class="h4">Khoa học tổng quát</a>
                             <p class="mt-3 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed purus consectetur,</p>
                         </div>
                     </div>
@@ -219,7 +215,7 @@
                         <img src="{{ asset('assets/img/program-teacher.jpg') }}" class="img-fluid rounded-circle p-2 border border-primary bg-white" alt="" style="width: 70px; height: 70px;">
                         <div class="ms-3">
                             <h6 class="mb-0 text-primary">Mary Mordern</h6>
-                            <small>Arts Designer</small>
+                            <small>Giáo viên nghệ thuật</small>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between px-4 py-2 bg-primary rounded-bottom">
@@ -230,59 +226,19 @@
                 </div>
             </div>
             <div class="d-inline-block text-center wow fadeIn" data-wow-delay="0.1s">
-                <a href="#" class="btn btn-primary px-5 py-3 text-white btn-border-radius">Vew All Programs</a>
+                <a href="#" class="btn btn-primary px-5 py-3 text-white btn-border-radius">Xem tất cả chương trình</a>
             </div>
         </div> 
     </div>
 </div>
 <!-- Program End -->
 
-<!-- Events Start -->
-<div class="container-fluid events py-5 bg-light">
-    <div class="container py-5">
-        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Our Events</h4>
-            <h1 class="mb-5 display-3">Our Upcoming Events</h1>
-        </div>
-        <div class="row g-5 justify-content-center">
-            @forelse($upcomingEvents as $event)
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeIn" data-wow-delay="0.1s">
-                <div class="events-item bg-primary rounded">
-                    <div class="events-inner position-relative">
-                        <div class="events-img overflow-hidden rounded-circle position-relative">
-                            <img src="{{ $event->image ? asset('storage/' . $event->image) : asset('assets/img/event-1.jpg') }}" class="img-fluid w-100 rounded-circle" alt="Image" style="height: 250px; object-fit: cover;">
-                            <div class="event-overlay">
-                                <a href="{{ $event->image ? asset('storage/' . $event->image) : asset('assets/img/event-1.jpg') }}" data-lightbox="event-1"><i class="fas fa-search-plus text-white fa-2x"></i></a>
-                            </div>
-                        </div>
-                        <div class="px-4 py-2 bg-secondary text-white text-center events-rate">{{ $event->start_date->format('d M') }}</div>
-                        <div class="d-flex justify-content-between px-4 py-2 bg-secondary">
-                            <small class="text-white"><i class="fas fa-calendar me-1 text-primary"></i> {{ $event->start_date->format('H:i') }}</small>
-                            <small class="text-white"><i class="fas fa-map-marker-alt me-1 text-primary"></i> {{ Str::limit($event->location, 15) }}</small>
-                        </div>
-                    </div>
-                    <div class="events-text p-4 border border-primary bg-white border-top-0 rounded-bottom">
-                        <a href="#" class="h4">{{ Str::limit($event->title, 25) }}</a>
-                        <p class="mb-0 mt-3">{{ Str::limit($event->description, 80) }}</p>
-                    </div>
-                </div>
-            </div>
-            @empty
-            <div class="col-12 text-center">
-                <p>No upcoming events at the moment.</p>
-            </div>
-            @endforelse
-        </div>
-    </div>
-</div>
-<!-- Events End-->
-
 <!-- Blog Start-->
 <div class="container-fluid blog py-5">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Latest News & Blog</h4>
-            <h1 class="mb-5 display-3">Read Our Latest News & Blog</h1>
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Tin tức & Blog mới nhất</h4>
+            <h1 class="mb-5 display-3">Đọc tin tức & Blog mới nhất của chúng tôi</h1>
         </div>
         <div class="row g-5 justify-content-center">
             @forelse($recentPosts as $post)
@@ -293,7 +249,7 @@
                     </div>
                     <div class="d-flex justify-content-between px-4 py-3 bg-light border-bottom border-primary blog-date-comments">
                         <small class="text-dark"><i class="fas fa-calendar me-1 text-dark"></i> {{ $post->created_at->format('d M Y') }}</small>
-                        <small class="text-dark"><i class="fas fa-comment-alt me-1 text-dark"></i> Comments ({{ $post->comments_count ?? 0 }})</small>
+                        <small class="text-dark"><i class="fas fa-comment-alt me-1 text-dark"></i> Bình luận ({{ $post->comments_count ?? 0 }})</small>
                     </div>
                     <div class="blog-content d-flex align-items-center px-4 py-3 bg-light">
                         <div class="overflow-hidden rounded-circle rounded-top border border-primary">
@@ -301,7 +257,7 @@
                         </div>
                         <div class="ms-3">
                             <h6 class="text-primary">{{ $post->user->name ?? 'Admin' }}</h6>
-                            <p class="text-muted">{{ $post->category->name ?? 'Uncategorized' }}</p>
+                            <p class="text-muted">{{ $post->category->name ?? 'Chưa phân loại' }}</p>
                         </div>
                     </div>
                     <div class="px-4 pb-4 bg-light rounded-bottom">
@@ -310,14 +266,14 @@
                             <p class="mt-3 mb-4">{{ Str::limit($post->excerpt, 80) }}</p>
                         </div>
                         <div class="text-center">
-                            <a href="#" class="btn btn-primary text-white px-4 py-2 mb-3 btn-border-radius">View Details</a>
+                            <a href="#" class="btn btn-primary text-white px-4 py-2 mb-3 btn-border-radius">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
             </div>
             @empty
             <div class="col-12 text-center">
-                <p>No blog posts available yet.</p>
+                <p>Chưa có bài viết nào.</p>
             </div>
             @endforelse
         </div>
@@ -329,8 +285,8 @@
 <div class="container-fluid team py-5">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Our Team</h4>
-            <h1 class="mb-5 display-3">Meet With Our Expert Teacher</h1>
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Đội ngũ của chúng tôi</h4>
+            <h1 class="mb-5 display-3">Gặp gỡ giáo viên chuyên nghiệp</h1>
         </div>
         <div class="row g-5 justify-content-center">
             @forelse($teachers as $teacher)
@@ -351,7 +307,7 @@
             </div>
             @empty
             <div class="col-12 text-center">
-                <p>No teachers available yet.</p>
+                <p>Chưa có giáo viên nào.</p>
             </div>
             @endforelse
         </div>
@@ -363,8 +319,8 @@
 <div class="container-fluid testimonial py-5">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Our Testimonials</h4>
-            <h1 class="mb-5 display-3">Parents Say About Us</h1>
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Đánh giá</h4>
+            <h1 class="mb-5 display-3">Phụ huynh nói gì về chúng tôi</h1>
         </div>
         <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.3s">
             <div class="testimonial-item img-border-radius bg-light border border-primary p-4">
@@ -375,8 +331,33 @@
                             <img src="{{ asset('assets/img/testimonial-2.jpg') }}" class="rounded-circle p-2" style="width: 80px; height: 80px; border-style: dotted; border-color: var(--bs-primary);" alt="">
                         </div>
                         <div class="ms-4">
-                            <h4 class="text-dark">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
+                            <h4 class="text-dark">Tên khách hàng</h4>
+                            <p class="m-0 pb-3">Nghề nghiệp</p>
+                            <div class="d-flex pe-5">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-top border-primary mt-4 pt-3">
+                        <p class="mb-0">Chúng tôi rất hài lòng với sự chăm sóc và giáo dục mà nhà trường mang lại cho con em chúng tôi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item img-border-radius bg-light border border-primary p-4">
+                <div class="p-4 position-relative">
+                    <i class="fa fa-quote-right fa-2x text-primary position-absolute" style="top: 15px; right: 15px;"></i>
+                    <div class="d-flex align-items-center">
+                        <div class="border border-primary bg-white rounded-circle">
+                            <img src="{{ asset('assets/img/testimonial-2.jpg') }}" class="rounded-circle p-2" style="width: 80px; height: 80px; border-style: dotted; border-color: var(--bs-primary);" alt="">
+                        </div>
+                        <div class="ms-4">
+                            <h4 class="text-dark">Tên khách hàng</h4>
+                            <p class="m-0 pb-3">Nghề nghiệp</p>
                             <div class="d-flex pe-5">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -400,33 +381,8 @@
                             <img src="{{ asset('assets/img/testimonial-2.jpg') }}" class="rounded-circle p-2" style="width: 80px; height: 80px; border-style: dotted; border-color: var(--bs-primary);" alt="">
                         </div>
                         <div class="ms-4">
-                            <h4 class="text-dark">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border-top border-primary mt-4 pt-3">
-                        <p class="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item img-border-radius bg-light border border-primary p-4">
-                <div class="p-4 position-relative">
-                    <i class="fa fa-quote-right fa-2x text-primary position-absolute" style="top: 15px; right: 15px;"></i>
-                    <div class="d-flex align-items-center">
-                        <div class="border border-primary bg-white rounded-circle">
-                            <img src="{{ asset('assets/img/testimonial-2.jpg') }}" class="rounded-circle p-2" style="width: 80px; height: 80px; border-style: dotted; border-color: var(--bs-primary);" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-dark">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
+                            <h4 class="text-dark">Tên khách hàng</h4>
+                            <p class="m-0 pb-3">Nghề nghiệp</p>
                             <div class="d-flex pe-5">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
