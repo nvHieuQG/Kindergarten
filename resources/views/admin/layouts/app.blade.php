@@ -148,54 +148,50 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <i class="fas fa-child me-2"></i> Kindergarten Admin
+            <i class="fas fa-child me-2"></i> Quản trị Mầm non
         </div>
 
         <nav class="sidebar-nav">
             <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="fas fa-home"></i> Dashboard
+                <i class="fas fa-home"></i> Bảng điều khiển
             </a>
 
             <a href="{{ route('admin.posts.index') }}" class="nav-link {{ request()->routeIs('admin
 
 .posts.*') ? 'active' : '' }}">
-                <i class="fas fa-newspaper"></i> Posts
+                <i class="fas fa-newspaper"></i> Bài viết
             </a>
 
             <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
-                <i class="fas fa-folder"></i> Categories
+                <i class="fas fa-folder"></i> Danh mục
             </a>
 
             <a href="{{ route('admin.teachers.index') }}" class="nav-link {{ request()->routeIs('admin.teachers.*') ? 'active' : '' }}">
-                <i class="fas fa-chalkboard-teacher"></i> Teachers
+                <i class="fas fa-chalkboard-teacher"></i> Giáo viên
             </a>
 
-            <a href="{{ route('admin.events.index') }}" class="nav-link {{ request()->routeIs('admin.events.*') ? 'active' : '' }}">
-                <i class="fas fa-calendar-alt"></i> Events
-            </a>
+
 
             <a href="{{ route('admin.enrollments.index') }}" class="nav-link {{ request()->routeIs('admin.enrollments.*') ? 'active' : '' }}">
-                <i class="fas fa-user-plus"></i> Enrollments
+                <i class="fas fa-user-plus"></i> Tuyển sinh
             </a>
 
             <a href="{{ route('admin.contacts.index') }}" class="nav-link {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}">
-                <i class="fas fa-envelope"></i> Contacts
+                <i class="fas fa-envelope"></i> Liên hệ
             </a>
 
-            <a href="{{ route('admin.comments.index') }}" class="nav-link {{ request()->routeIs('admin.comments.*') ? 'active' : '' }}">
-                <i class="fas fa-comments"></i> Comments
-            </a>
+
 
             <hr class="mx-3 my-2" style="border-color: rgba(255,255,255,0.1);">
 
             <a href="{{ route('home') }}" class="nav-link" target="_blank">
-                <i class="fas fa-external-link-alt"></i> View Website
+                <i class="fas fa-external-link-alt"></i> Xem trang web
             </a>
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="nav-link border-0 bg-transparent w-100 text-start">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
                 </button>
             </form>
         </nav>
@@ -209,18 +205,18 @@
                 <h5 class="mb-0">@yield('page-title', 'Dashboard')</h5>
             </div>
             <div class="d-flex align-items-center">
-                <span class="me-3">Hello, {{ auth()->user()->name }}</span>
+                <span class="me-3">Xin chào, {{ auth()->user()->name }}</span>
                 <div class="dropdown">
                     <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-user-circle"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Hồ sơ</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="dropdown-item">Logout</button>
+                                <button type="submit" class="dropdown-item">Đăng xuất</button>
                             </form>
                         </li>
                     </ul>

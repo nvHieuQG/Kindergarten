@@ -1,13 +1,13 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Events Management')
-@section('page-title', 'Events Management')
+@section('title', 'Quản lý sự kiện')
+@section('page-title', 'Quản lý sự kiện')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="mb-0">All Events</h4>
+    <h4 class="mb-0">Tất cả sự kiện</h4>
     <a href="{{ route('admin.events.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus me-1"></i> New Event
+        <i class="fas fa-plus me-1"></i> Sự kiện mới
     </a>
 </div>
 
@@ -17,12 +17,12 @@
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th>Event</th>
-                        <th>Date & Time</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                        <th>Participants</th>
-                        <th>Actions</th>
+                        <th>Sự kiện</th>
+                        <th>Ngày & Giờ</th>
+                        <th>Địa điểm</th>
+                        <th>Trạng thái</th>
+                        <th>Người tham gia</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,24 +54,28 @@
                                 @elseif($event->status == 'completed') bg-secondary
                                 @else bg-danger
                                 @endif">
-                                {{ ucfirst($event->status) }}
+                                @if($event->status == 'upcoming') Sắp tới
+                                @elseif($event->status == 'ongoing') Đang diễn ra
+                                @elseif($event->status == 'completed') Đã hoàn thành
+                                @else Đã hủy
+                                @endif
                             </span>
                         </td>
                         <td>
                             @if($event->max_participants)
                                 <span class="badge bg-info text-dark">0 / {{ $event->max_participants }}</span>
                             @else
-                                <span class="badge bg-light text-dark">Unlimited</span>
+                                <span class="badge bg-light text-dark">Không giới hạn</span>
                             @endif
                         </td>
                         <td class="table-actions">
-                            <a href="{{ route('admin.events.edit', $event) }}" class="btn btn-sm btn-warning" title="Edit">
+                            <a href="{{ route('admin.events.edit', $event) }}" class="btn btn-sm btn-warning" title="Sửa">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('admin.events.destroy', $event) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this event?')">
+                            <form action="{{ route('admin.events.destroy', $event) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa sự kiện này?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                <button type="submit" class="btn btn-sm btn-danger" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -81,9 +85,9 @@
                     <tr>
                         <td colspan="6" class="text-center py-4 text-muted">
                             <i class="fas fa-calendar-times fa-3x mb-3 d-block"></i>
-                            <p>No events found. Plan your first event!</p>
+                            <p>Không tìm thấy sự kiện nào. Hãy lên kế hoạch cho sự kiện đầu tiên!</p>
                             <a href="{{ route('admin.events.create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus me-1"></i> Create Event
+                                <i class="fas fa-plus me-1"></i> Tạo sự kiện
                             </a>
                         </td>
                     </tr>

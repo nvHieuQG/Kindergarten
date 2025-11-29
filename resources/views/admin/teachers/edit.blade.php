@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Edit Teacher')
-@section('page-title', 'Edit Teacher Profile')
+@section('title', 'Chỉnh sửa giáo viên')
+@section('page-title', 'Chỉnh sửa hồ sơ giáo viên')
 
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card shadow-sm">
             <div class="card-header bg-white">
-                <h5 class="mb-0">Edit: {{ $teacher->name }}</h5>
+                <h5 class="mb-0">Chỉnh sửa: {{ $teacher->name }}</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.teachers.update', $teacher) }}" method="POST" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Name <span class="text-danger">*</span></label>
+                            <label class="form-label">Tên <span class="text-danger">*</span></label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" 
                                    value="{{ old('name', $teacher->name) }}" required>
                             @error('name')
@@ -25,7 +25,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Position <span class="text-danger">*</span></label>
+                            <label class="form-label">Chức vụ <span class="text-danger">*</span></label>
                             <input type="text" name="position" class="form-control @error('position') is-invalid @enderror" 
                                    value="{{ old('position', $teacher->position) }}" required>
                             @error('position')
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Specialty</label>
+                        <label class="form-label">Chuyên môn</label>
                         <input type="text" name="specialty" class="form-control @error('specialty') is-invalid @enderror" 
                                value="{{ old('specialty', $teacher->specialty) }}">
                         @error('specialty')
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Bio</label>
+                        <label class="form-label">Tiểu sử</label>
                         <textarea name="bio" rows="4" class="form-control @error('bio') is-invalid @enderror">{{ old('bio', $teacher->bio) }}</textarea>
                         @error('bio')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -61,7 +61,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Phone</label>
+                            <label class="form-label">Số điện thoại</label>
                             <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" 
                                    value="{{ old('phone', $teacher->phone) }}">
                             @error('phone')
@@ -71,20 +71,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Photo</label>
+                        <label class="form-label">Ảnh</label>
                         @if($teacher->photo)
                             <div class="mb-2">
                                 <img src="{{ asset('storage/' . $teacher->photo) }}" class="img-thumbnail rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
                             </div>
                         @endif
                         <input type="file" name="photo" class="form-control @error('photo') is-invalid @enderror" accept="image/*">
-                        <small class="text-muted">Upload new photo to replace current</small>
+                        <small class="text-muted">Tải ảnh mới để thay thế ảnh hiện tại</small>
                         @error('photo')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <h6 class="mt-4 mb-3">Social Media Links</h6>
+                    <h6 class="mt-4 mb-3">Liên kết mạng xã hội</h6>
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <div class="input-group">
@@ -108,14 +108,14 @@
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Display Order</label>
+                            <label class="form-label">Thứ tự hiển thị</label>
                             <input type="number" name="order" class="form-control" value="{{ old('order', $teacher->order) }}" min="0">
                         </div>
                         <div class="col-md-6 d-flex align-items-end">
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="checkbox" name="is_active" id="is_active" value="1" {{ old('is_active', $teacher->is_active) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_active">
-                                    Active (Visible on website)
+                                    Hoạt động (Hiển thị trên trang web)
                                 </label>
                             </div>
                         </div>
@@ -123,10 +123,10 @@
 
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i> Update Teacher
+                            <i class="fas fa-save me-1"></i> Cập nhật giáo viên
                         </button>
                         <a href="{{ route('admin.teachers.index') }}" class="btn btn-secondary">
-                            <i class="fas fa-times me-1"></i> Cancel
+                            <i class="fas fa-times me-1"></i> Hủy
                         </a>
                     </div>
                 </form>

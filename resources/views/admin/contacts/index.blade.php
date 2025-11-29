@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Contact Messages')
-@section('page-title', 'Contact Messages')
+@section('title', 'Tin nhắn liên hệ')
+@section('page-title', 'Tin nhắn liên hệ')
 
 @section('content')
 <div class="card shadow-sm">
@@ -10,11 +10,11 @@
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th>Name</th>
-                        <th>Subject</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>Tên</th>
+                        <th>Chủ đề</th>
+                        <th>Ngày</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,17 +28,17 @@
                         <td>{{ $contact->created_at->format('M d, Y H:i') }}</td>
                         <td>
                             <span class="badge {{ $contact->status == 'unread' ? 'bg-danger' : 'bg-secondary' }}">
-                                {{ ucfirst($contact->status) }}
+                                {{ ucfirst($contact->status) == 'Unread' ? 'Chưa đọc' : 'Đã đọc' }}
                             </span>
                         </td>
                         <td class="table-actions">
-                            <a href="{{ route('admin.contacts.show', $contact) }}" class="btn btn-sm btn-info text-white" title="Read Message">
+                            <a href="{{ route('admin.contacts.show', $contact) }}" class="btn btn-sm btn-info text-white" title="Đọc tin nhắn">
                                 <i class="fas fa-envelope-open"></i>
                             </a>
-                            <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this message?')">
+                            <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa tin nhắn này?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                <button type="submit" class="btn btn-sm btn-danger" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -48,7 +48,7 @@
                     <tr>
                         <td colspan="5" class="text-center py-4 text-muted">
                             <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
-                            <p>No messages found.</p>
+                            <p>Không tìm thấy tin nhắn nào.</p>
                         </td>
                     </tr>
                     @endforelse

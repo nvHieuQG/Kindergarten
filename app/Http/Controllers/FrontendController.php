@@ -89,9 +89,10 @@ class FrontendController extends Controller
             'child_name' => 'required|string|max:255',
             'child_dob' => 'nullable|date',
             'child_gender' => 'required|in:male,female,other',
-            'parent_name' => 'required|string|max:255',
-            'parent_email' => 'required|email|max:255',
-            'parent_phone' => 'required|string|max:20',
+            'parent_name' => 'nullable|string|max:255',
+
+            'parent_phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
             'program' => 'nullable|string|max:255',
             'message' => 'nullable|string',
         ]);

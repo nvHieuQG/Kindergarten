@@ -22,21 +22,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="{{ route('home') }}" class="nav-item nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-                    <a href="{{ route('about') }}" class="nav-item nav-link {{ request()->routeIs('about') ? 'active' : '' }}">About</a>
-                    <a href="{{ route('services') }}" class="nav-item nav-link {{ request()->routeIs('services') ? 'active' : '' }}">Services</a>
-                    <a href="{{ route('programs') }}" class="nav-item nav-link {{ request()->routeIs('programs') ? 'active' : '' }}">Programs</a>
-                    <a href="{{ route('events') }}" class="nav-item nav-link {{ request()->routeIs('events') ? 'active' : '' }}">Events</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="{{ route('blog') }}" class="dropdown-item">Our Blog</a>
-                            <a href="{{ route('team') }}" class="dropdown-item">Our Team</a>
-                            <a href="{{ route('testimonials') }}" class="dropdown-item">Testimonial</a>
-                            <a href="{{ route('enrollment') }}" class="dropdown-item">Enrollment</a>
-                        </div>
-                    </div>
-                    <a href="{{ route('contact') }}" class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
+                    <a href="{{ route('home') }}" class="nav-item nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Trang chủ</a>
+                    <a href="{{ route('about') }}" class="nav-item nav-link {{ request()->routeIs('about') ? 'active' : '' }}">Thông tin</a>
+                    <a href="{{ route('blog') }}" class="nav-item nav-link {{ request()->routeIs('blog') ? 'active' : '' }}">Bài viết</a>
+                    <a href="{{ route('enrollment') }}" class="nav-item nav-link {{ request()->routeIs('enrollment') ? 'active' : '' }}">Tuyển sinh</a>
+                    <a href="{{ route('contact') }}" class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Liên hệ</a>
                 </div>
                 <div class="d-flex me-4">
                     <div id="phone-tada" class="d-flex align-items-center justify-content-center">
@@ -48,8 +38,8 @@
                         </a>
                     </div>
                     <div class="d-flex flex-column pe-3 border-end border-primary">
-                        <span class="text-primary">Have any questions?</span>
-                        <a href="#"><span class="text-secondary">Free: + 0123 456 7890</span></a>
+                        <span class="text-primary">Bạn có câu hỏi?</span>
+                        <a href="#"><span class="text-secondary">Miễn phí: + 0123 456 7890</span></a>
                     </div>
                 </div>
                 <button class="btn-search btn btn-primary btn-md-square rounded-circle" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-white"></i></button>
@@ -57,9 +47,9 @@
                 <div class="ms-3">
                     @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="btn btn-primary rounded-pill px-3 py-2">Dashboard</a>
+                            <a href="{{ url('/dashboard') }}" class="btn btn-primary rounded-pill px-3 py-2">Bảng điều khiển</a>
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-3 py-2">Login</a>
+                            <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-3 py-2">Đăng nhập</a>
                         @endauth
                     @endif
                 </div>
@@ -74,12 +64,12 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content rounded-0">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tìm kiếm theo từ khóa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex align-items-center">
                 <div class="input-group w-75 mx-auto d-flex">
-                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                    <input type="search" class="form-control p-3" placeholder="từ khóa" aria-describedby="search-icon-1">
                     <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                 </div>
             </div>

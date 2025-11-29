@@ -17,12 +17,12 @@ use App\Http\Controllers\FrontendController;
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
-    Route::get('/services', 'services')->name('services');
-    Route::get('/programs', 'programs')->name('programs');
-    Route::get('/events', 'events')->name('events');
+    // Route::get('/services', 'services')->name('services');
+    // Route::get('/programs', 'programs')->name('programs');
+    // Route::get('/events', 'events')->name('events');
     Route::get('/blog', 'blog')->name('blog');
-    Route::get('/team', 'team')->name('team');
-    Route::get('/testimonials', 'testimonials')->name('testimonials');
+    // Route::get('/team', 'team')->name('team');
+    // Route::get('/testimonials', 'testimonials')->name('testimonials');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/enrollment', 'enrollment')->name('enrollment');
 
@@ -62,7 +62,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('teachers', TeacherController::class);
 
     // Events Management
-    Route::resource('events', EventController::class);
+    // Route::resource('events', EventController::class);
 
     // Enrollments Management
     Route::resource('enrollments', EnrollmentController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
@@ -73,8 +73,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::patch('contacts/{contact}/mark-read', [ContactController::class, 'markAsRead'])->name('contacts.mark-read');
 
     // Comments Management
-    Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
-    Route::patch('comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
-    Route::patch('comments/{comment}/reject', [CommentController::class, 'reject'])->name('comments.reject');
-    Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    // Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
+    // Route::patch('comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
+    // Route::patch('comments/{comment}/reject', [CommentController::class, 'reject'])->name('comments.reject');
+    // Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });

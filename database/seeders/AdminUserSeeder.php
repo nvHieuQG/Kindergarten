@@ -12,16 +12,18 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::create([
-            'name' => 'Admin',
-            'email' => 'admin@kindergarten.com',
-            'password' => bcrypt('password'),
-            'role' => 'admin',
-            'email_verified_at' => now(),
-        ]);
+        \App\Models\User::firstOrCreate(
+            ['email' => 'admin@kindergarten.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('111111'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ]
+        );
 
         echo "Admin user created successfully!\n";
         echo "Email: admin@kindergarten.com\n";
-        echo "Password: password\n";
+        echo "Password: 111111\n";
     }
 }
