@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Teacher extends Model
+{
+    protected $fillable = [
+        'name',
+        'position',
+        'specialty',
+        'bio',
+        'photo',
+        'email',
+        'phone',
+        'facebook',
+        'twitter',
+        'instagram',
+        'order',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+        'order' => 'integer',
+    ];
+
+    // Scopes
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('order');
+    }
+}
