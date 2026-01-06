@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'BabyCare - Website Nhà Trẻ')</title>
+    <title>@yield('title', ' Hoa Hướng Dương - Website Nhà Trẻ')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="@yield('meta_keywords', '')" name="keywords">
     <meta content="@yield('meta_description', '')" name="description">

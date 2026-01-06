@@ -49,7 +49,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Nội dung <span class="text-danger">*</span></label>
-                        <textarea name="content" rows="10" class="form-control @error('content') is-invalid @enderror" required>{{ old('content') }}</textarea>
+                        <textarea name="content" id="editor" rows="10" class="form-control @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
                         @error('content')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -128,3 +128,27 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ), {
+            toolbar: [ 
+                'heading', '|', 
+                'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
+                'insertTable', 'imageUpload', 'mediaEmbed', '|',
+                'undo', 'redo' 
+            ],
+            ckfinder: {
+                uploadUrl: '{{ route('admin.posts.upload').'?_token='.csrf_token() }}',
+            },
+            mediaEmbed: {
+                previewsInData: true
+            }
+        })
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+@endpush

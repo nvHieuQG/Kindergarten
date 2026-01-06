@@ -10,17 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('icon')->nullable(); // FontAwesome class
             $table->string('image')->nullable();
-            $table->dateTime('start_date');
-            $table->dateTime('end_date')->nullable();
-            $table->string('location')->nullable();
-            $table->integer('max_participants')->nullable();
-            $table->enum('status', ['upcoming', 'ongoing', 'completed', 'cancelled'])->default('upcoming');
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('services');
     }
 };

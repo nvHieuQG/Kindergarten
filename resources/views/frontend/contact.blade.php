@@ -1,6 +1,6 @@
 @extends('layouts.babycare')
 
-@section('title', 'Liên hệ - BabyCare')
+@section('title', 'Liên hệ -  Hoa Hướng Dương')
 
 @section('content')
     <x-page-header title="Liên hệ" active="Liên hệ" />
@@ -49,7 +49,7 @@
                     </div>
                     <div class="ms-3">
                         <h5>Địa chỉ</h5>
-                        <p class="mb-0">123 Street, New York, USA</p>
+                        <p class="mb-0">{{ $settings['site_address'] ?? '123 Street, New York, USA' }}</p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-4">
@@ -58,7 +58,7 @@
                     </div>
                     <div class="ms-3">
                         <h5>Điện thoại</h5>
-                        <p class="mb-0">+012 345 67890</p>
+                        <p class="mb-0">{{ $settings['site_phone'] ?? '+012 345 67890' }}</p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="ms-3">
                         <h5>Email</h5>
-                        <p class="mb-0">info@example.com</p>
+                        <p class="mb-0">{{ $settings['site_email'] ?? 'info@example.com' }}</p>
                     </div>
                 </div>
             </div>

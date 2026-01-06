@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Teacher;
-use App\Models\Event;
+use App\Models\Service;
+use App\Models\Setting;
 use App\Models\Contact;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
@@ -15,9 +16,8 @@ class FrontendController extends Controller
     {
         $recentPosts = Post::published()->latest()->take(3)->get();
         $teachers = Teacher::active()->ordered()->take(4)->get();
-        $upcomingEvents = Event::upcoming()->take(3)->get();
-
-        return view('frontend.home', compact('recentPosts', 'teachers', 'upcomingEvents'));
+        $services = Service::latest()->take(4)->get();
+        return view('frontend.home', compact('recentPosts', 'teachers', 'services'));
     }
 
     public function about()
@@ -36,15 +36,20 @@ class FrontendController extends Controller
         return view('frontend.program');
     }
 
-    public function events()
-    {
-        $events = Event::upcoming()->paginate(9);
-        return view('frontend.event', compact('events'));
-    }
 
-    public function blog()
+    public function blog(Request $request)
     {
-        $posts = Post::published()->latest()->paginate(9);
+        $query = Post::published();
+
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        $posts = $query->latest()->paginate(9);
         return view('frontend.blog', compact('posts'));
     }
 
@@ -100,5 +105,17 @@ class FrontendController extends Controller
         Enrollment::create($validated);
 
         return redirect()->back()->with('success', 'Enrollment application submitted successfully! We will contact you soon.');
+    }
+
+    public function postDetail($slug)
+    {
+        $post = Post::published()->where('slug', $slug)->firstOrFail();
+
+        // Increase view count
+        $post->increment('views');
+
+        $recentPosts = Post::published()->where('id', '!=', $post->id)->latest()->take(3)->get();
+
+        return view('frontend.post-detail', compact('post', 'recentPosts'));
     }
 }

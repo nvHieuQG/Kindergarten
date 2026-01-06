@@ -1,6 +1,6 @@
 @extends('layouts.babycare')
 
-@section('title', 'Tuyển sinh - BabyCare')
+@section('title', 'Tuyển sinh - Hoa Hướng Dương')
 
 @section('content')
     <x-page-header title="Tuyển sinh" active="Tuyển sinh" />

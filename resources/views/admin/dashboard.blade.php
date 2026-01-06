@@ -41,24 +41,6 @@
         </div>
     </div>
 
-    <!-- Events Stats -->
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="text-muted small mb-1">Tổng số sự kiện</div>
-                    <h3 class="mb-0">{{ $stats['total_events'] }}</h3>
-                    <small class="text-info">
-                        <i class="fas fa-calendar-alt"></i> {{ $stats['upcoming_events'] }} sắp tới
-                    </small>
-                </div>
-                <div class="stat-icon bg-info bg-opacity-10 text-info">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Enrollments Stats -->
     <div class="col-md-6 col-lg-3">
         <div class="stat-card">
@@ -76,9 +58,7 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="row g-4 mb-4">
     <!-- Contacts Stats -->
     <div class="col-md-6 col-lg-3">
         <div class="stat-card">
@@ -92,56 +72,6 @@
                 </div>
                 <div class="stat-icon bg-danger bg-opacity-10 text-danger">
                     <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Comments Stats -->
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="text-muted small mb-1">Bình luận</div>
-                    <h3 class="mb-0">{{ $stats['total_comments'] }}</h3>
-                    <small class="text-warning">
-                        <i class="fas fa-clock"></i> {{ $stats['pending_comments'] }} đang chờ
-                    </small>
-                </div>
-                <div class="stat-icon bg-secondary bg-opacity-10 text-secondary">
-                    <i class="fas fa-comments"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="text-muted small mb-1">Thao tác nhanh</div>
-                    <a href="{{ route('admin.posts.create') }}" class="btn btn-primary btn-sm mt-2">
-                        <i class="fas fa-plus"></i> Bài viết mới
-                    </a>
-                </div>
-                <div class="stat-icon bg-primary bg-opacity-10 text-primary">
-                    <i class="fas fa-plus-circle"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="text-muted small mb-1">Trang web</div>
-                    <a href="{{ route('home') }}" class="btn btn-outline-primary btn-sm mt-2" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Xem trang web
-                    </a>
-                </div>
-                <div class="stat-icon bg-success bg-opacity-10 text-success">
-                    <i class="fas fa-globe"></i>
                 </div>
             </div>
         </div>
@@ -258,7 +188,7 @@
     </div>
 </div>
 
-<div class="row g-4 mt-2">
+<div class="row g-4 mt-4">
     <!-- Recent Contacts -->
     <div class="col-lg-6">
         <div class="card shadow-sm">
@@ -288,51 +218,6 @@
             @if($recentContacts->count() > 0)
             <div class="card-footer bg-white text-center">
                 <a href="{{ route('admin.contacts.index') }}" class="text-decoration-none">Xem tất cả liên hệ <i class="fas fa-arrow-right ms-1"></i></a>
-            </div>
-            @endif
-        </div>
-    </div>
-
-    <!-- Pending Comments -->
-    <div class="col-lg-6">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-comments me-2 text-warning"></i>Bình luận đang chờ</h6>
-            </div>
-            <div class="card-body p-0">
-                <div class="list-group list-group-flush">
-                    @forelse($pendingComments as $comment)
-                    <div class="list-group-item">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">{{ $comment->name }}</h6>
-                            <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
-                        </div>
-                        <p class="mb-1"><small>Trên bài: <strong>{{ $comment->post->title }}</strong></small></p>
-                        <p class="mb-2">{{ Str::limit($comment->content, 80) }}</p>
-                        <div>
-                            <form method="POST" action="{{ route('admin.comments.approve', $comment) }}" class="d-inline">
-                                @csrf
-                                @method('PATCH')
-                                <button class="btn btn-sm btn-success"><i class="fas fa-check"></i> Duyệt</button>
-                            </form>
-                            <form method="POST" action="{{ route('admin.comments.reject', $comment) }}" class="d-inline">
-                                @csrf
-                                @method('PATCH')
-                                <button class="btn btn-sm btn-warning"><i class="fas fa-times"></i> Từ chối</button>
-                            </form>
-                        </div>
-                    </div>
-                    @empty
-                    <div class="list-group-item text-center py-4 text-muted">
-                        <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                        Không có bình luận đang chờ
-                    </div>
-                    @endforelse
-                </div>
-            </div>
-            @if($pendingComments->count() > 0)
-            <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.comments.index') }}" class="text-decoration-none">Xem tất cả bình luận <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
             @endif
         </div>

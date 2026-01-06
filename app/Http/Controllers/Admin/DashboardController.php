@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class DashboardController extends Controller
 {
@@ -14,8 +17,7 @@ class DashboardController extends Controller
             'published_posts' => \App\Models\Post::published()->count(),
             'total_teachers' => \App\Models\Teacher::count(),
             'active_teachers' => \App\Models\Teacher::active()->count(),
-            'total_events' => \App\Models\Event::count(),
-            'upcoming_events' => \App\Models\Event::upcoming()->count(),
+
             'total_enrollments' => \App\Models\Enrollment::count(),
             'pending_enrollments' => \App\Models\Enrollment::pending()->count(),
             'total_contacts' => \App\Models\Contact::count(),

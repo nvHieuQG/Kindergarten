@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             TeacherSeeder::class,
             PostSeeder::class,
+                // EventSeeder::class, // Removed
+            ServiceSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrapFive();
+
+        // Share settings with all views
+        if (!app()->runningInConsole()) {
+            $settings = \App\Models\Setting::pluck('value', 'key');
+            view()->share('settings', $settings);
+        }
     }
 }

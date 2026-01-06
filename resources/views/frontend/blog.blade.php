@@ -1,6 +1,6 @@
 @extends('layouts.babycare')
 
-@section('title', 'Blog - BabyCare')
+@section('title', 'Blog -  Hoa Hướng Dương')
 
 @section('content')
     <x-page-header title="Blog của chúng tôi" active="Blog" />
@@ -14,32 +14,27 @@
         </div>
         <div class="row g-5 justify-content-center">
             @forelse($posts as $post)
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeIn" data-wow-delay="0.1s">
-                <div class="blog-item rounded-bottom">
-                    <div class="blog-img overflow-hidden position-relative img-border-radius">
-                        <img src="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('assets/img/blog-1.jpg') }}" class="img-fluid w-100" alt="Image" style="height: 250px; object-fit: cover;">
+            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="{{ $loop->iteration * 0.1 }}s">
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('assets/img/blog-1.jpg') }}" alt="{{ $post->title }}">
+                        <div class="category-badge">{{ $post->category->name ?? 'Tin tức' }}</div>
                     </div>
-                    <div class="d-flex justify-content-between px-4 py-3 bg-light border-bottom border-primary blog-date-comments">
-                        <small class="text-dark"><i class="fas fa-calendar me-1 text-dark"></i> {{ $post->created_at->format('d M Y') }}</small>
-                        <small class="text-dark"><i class="fas fa-comment-alt me-1 text-dark"></i> Bình luận ({{ $post->comments_count ?? 0 }})</small>
+                    <div class="blog-content">
+                        <a href="{{ route('blog.show', $post->slug) }}" class="blog-title">{{ $post->title }}</a>
+                        <p class="blog-excerpt">{{ $post->excerpt }}</p>
+                        
+                        <div class="author-info">
+                            <img src="{{ asset('assets/img/program-teacher.jpg') }}" class="author-img" alt="Admin">
+                            <div>
+                                <h6 class="author-name">{{ $post->user->name ?? 'Cán bộ trường' }}</h6>
+                                <small class="text-muted">Tác giả</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="blog-content d-flex align-items-center px-4 py-3 bg-light">
-                        <div class="overflow-hidden rounded-circle rounded-top border border-primary">
-                            <img src="{{ asset('assets/img/program-teacher.jpg') }}" class="img-fluid rounded-circle p-2 rounded-top" alt="Image" style="width: 70px; height: 70px; border-style: dotted; border-color: var(--bs-primary) !important;">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="text-primary">{{ $post->user->name ?? 'Admin' }}</h6>
-                            <p class="text-muted">{{ $post->category->name ?? 'Chưa phân loại' }}</p>
-                        </div>
-                    </div>
-                    <div class="px-4 pb-4 bg-light rounded-bottom">
-                        <div class="blog-text-inner">
-                            <a href="#" class="h4">{{ Str::limit($post->title, 40) }}</a>
-                            <p class="mt-3 mb-4">{{ Str::limit($post->excerpt, 80) }}</p>
-                        </div>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-primary text-white px-4 py-2 mb-3 btn-border-radius">Xem chi tiết</a>
-                        </div>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar-alt"></i>{{ $post->created_at->format('d/m/Y') }}</span>
+                        <span><i class="fas fa-eye"></i>{{ $post->views }} lượt xem</span>
                     </div>
                 </div>
             </div>

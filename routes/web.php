@@ -5,10 +5,11 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TeacherController;
-use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
 // Frontend BabyCare Template Routes
@@ -17,14 +18,14 @@ use App\Http\Controllers\FrontendController;
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
-    // Route::get('/services', 'services')->name('services');
-    // Route::get('/programs', 'programs')->name('programs');
-    // Route::get('/events', 'events')->name('events');
     Route::get('/blog', 'blog')->name('blog');
-    // Route::get('/team', 'team')->name('team');
-    // Route::get('/testimonials', 'testimonials')->name('testimonials');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/enrollment', 'enrollment')->name('enrollment');
+    Route::get('/teachers', 'team')->name('teachers');
+    Route::get('/services', 'services')->name('services');
+    Route::get('/testimonials', 'testimonials')->name('testimonials');
+    Route::get('/programs', 'programs')->name('programs');
+    Route::get('/blog/{slug}', 'postDetail')->name('blog.show');
 
     // Form Submissions
     Route::post('/contact', 'storeContact')->name('contact.store');
@@ -56,14 +57,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Posts Management
     Route::resource('posts', PostController::class);
+    Route::post('posts/upload-image', [\App\Http\Controllers\Admin\PostImageController::class, 'upload'])->name('posts.upload');
     Route::resource('categories', CategoryController::class);
-
     // Teachers Management
     Route::resource('teachers', TeacherController::class);
-
-    // Events Management
-    // Route::resource('events', EventController::class);
-
+    Route::resource('services', ServiceController::class);
+    // Settings Routes
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
     // Enrollments Management
     Route::resource('enrollments', EnrollmentController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
     Route::patch('enrollments/{enrollment}/status', [EnrollmentController::class, 'updateStatus'])->name('enrollments.status');
@@ -72,9 +73,4 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('contacts', ContactController::class)->only(['index', 'show', 'destroy']);
     Route::patch('contacts/{contact}/mark-read', [ContactController::class, 'markAsRead'])->name('contacts.mark-read');
 
-    // Comments Management
-    // Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
-    // Route::patch('comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
-    // Route::patch('comments/{comment}/reject', [CommentController::class, 'reject'])->name('comments.reject');
-    // Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
