@@ -197,6 +197,32 @@
     </div>
 </div>
 <!-- Team End-->
+<!-- Branches Start -->
+<div class="container-fluid py-5 bg-light">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Hệ thống của chúng tôi</h4>
+            <h1 class="mb-5 display-5 fw-bold text-secondary">Các Cơ Sở Trường Mầm Non</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+            @foreach($branches as $branch)
+            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="{{ $loop->iteration * 0.1 }}s">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm border-top border-primary border-4">
+                    <h5 class="text-primary fw-bold mb-3">{{ $branch->name }}</h5>
+                    <p class="text-muted mb-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $branch->address }}</p>
+                    @if($branch->phone)
+                    <p class="text-muted mb-2"><i class="fa fa-phone-alt text-primary me-2"></i>{{ $branch->phone }}</p>
+                    @endif
+                    @if($branch->email)
+                    <p class="text-muted mb-0"><i class="fa fa-envelope text-primary me-2"></i>{{ $branch->email }}</p>
+                    @endif
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- Branches End -->
 
 <!-- Testimonial Start -->
 <div class="container-fluid testimonial py-5">

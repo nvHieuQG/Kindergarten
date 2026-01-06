@@ -49,7 +49,7 @@ class TeacherController extends Controller
         Teacher::create($validated);
 
         return redirect()->route('admin.teachers.index')
-            ->with('success', 'Teacher profile created successfully!');
+            ->with('success', 'Hồ sơ giáo viên đã được tạo thành công!');
     }
 
     public function edit(Teacher $teacher)
@@ -91,7 +91,7 @@ class TeacherController extends Controller
         $teacher->update($validated);
 
         return redirect()->route('admin.teachers.index')
-            ->with('success', 'Teacher profile updated successfully!');
+            ->with('success', 'Hồ sơ giáo viên đã được cập nhật thành công!');
     }
 
     public function destroy(Teacher $teacher)
@@ -103,6 +103,6 @@ class TeacherController extends Controller
         $teacher->delete();
 
         return redirect()->route('admin.teachers.index')
-            ->with('success', 'Teacher profile deleted successfully!');
+            ->with('success', 'Hồ sơ giáo viên đã được xóa thành công!');
     }
 }

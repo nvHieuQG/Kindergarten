@@ -42,34 +42,39 @@
                 </form>
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
-                <h4 class="text-primary">Thông tin liên hệ</h4>
+                <h4 class="text-primary mb-4">Hệ thống cơ sở của chúng tôi</h4>
+                
+                @forelse($branches as $branch)
+                <div class="bg-light p-4 rounded-3 mb-4 border-start border-primary border-4 shadow-sm">
+                    <h5 class="text-secondary fw-bold mb-3"><i class="fas fa-school me-2 text-primary"></i>{{ $branch->name }}</h5>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fa fa-map-marker-alt text-primary me-3"></i>
+                        <p class="mb-0 text-dark">{{ $branch->address }}</p>
+                    </div>
+                    @if($branch->phone)
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fa fa-phone-alt text-primary me-3"></i>
+                        <p class="mb-0 text-dark">{{ $branch->phone }}</p>
+                    </div>
+                    @endif
+                    @if($branch->email)
+                    <div class="d-flex align-items-center mb-0">
+                        <i class="fa fa-envelope text-primary me-3"></i>
+                        <p class="mb-0 text-dark">{{ $branch->email }}</p>
+                    </div>
+                    @endif
+                </div>
+                @empty
                 <div class="d-flex align-items-center mb-4">
                     <div class="bg-light d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50px;">
                         <i class="fa fa-map-marker-alt text-primary"></i>
                     </div>
                     <div class="ms-3">
-                        <h5>Địa chỉ</h5>
-                        <p class="mb-0">{{ $settings['site_address'] ?? '123 Street, New York, USA' }}</p>
+                        <h5>Địa chỉ trụ sở</h5>
+                        <p class="mb-0">{{ $settings['site_address'] ?? 'Đang cập nhật...' }}</p>
                     </div>
                 </div>
-                <div class="d-flex align-items-center mb-4">
-                    <div class="bg-light d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50px;">
-                        <i class="fa fa-phone-alt text-primary"></i>
-                    </div>
-                    <div class="ms-3">
-                        <h5>Điện thoại</h5>
-                        <p class="mb-0">{{ $settings['site_phone'] ?? '+012 345 67890' }}</p>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="bg-light d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50px;">
-                        <i class="fa fa-envelope text-primary"></i>
-                    </div>
-                    <div class="ms-3">
-                        <h5>Email</h5>
-                        <p class="mb-0">{{ $settings['site_email'] ?? 'info@example.com' }}</p>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </div>

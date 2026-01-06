@@ -7,7 +7,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle table-responsive-stack">
                 <thead class="table-light">
                     <tr>
                         <th>Tên trẻ</th>
@@ -21,14 +21,14 @@
                 <tbody>
                     @forelse($enrollments as $enrollment)
                     <tr>
-                        <td><strong>{{ $enrollment->child_name }}</strong></td>
-                        <td>
+                        <td data-label="Tên trẻ"><strong>{{ $enrollment->child_name }}</strong></td>
+                        <td data-label="Phụ huynh">
                             {{ $enrollment->parent_name }}<br>
                             <small class="text-muted">{{ $enrollment->parent_phone }}</small>
                         </td>
-                        <td>{{ $enrollment->program ?? 'N/A' }}</td>
-                        <td>{{ $enrollment->created_at->format('M d, Y') }}</td>
-                        <td>
+                        <td data-label="Chương trình">{{ $enrollment->program ?? 'N/A' }}</td>
+                        <td data-label="Ngày">{{ $enrollment->created_at->format('M d, Y') }}</td>
+                        <td data-label="Trạng thái">
                             <span class="badge 
                                 @if($enrollment->status == 'approved') bg-success
                                 @elseif($enrollment->status == 'pending') bg-warning
@@ -42,7 +42,7 @@
                                 @endif
                             </span>
                         </td>
-                        <td class="table-actions">
+                        <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.enrollments.show', $enrollment) }}" class="btn btn-sm btn-info text-white" title="Xem chi tiết">
                                 <i class="fas fa-eye"></i>
                             </a>

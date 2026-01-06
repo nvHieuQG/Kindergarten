@@ -863,3 +863,68 @@ h6,
 }
 
 /*** Wave Divider End ***/
+
+/* --- Responsive Refinements --- */
+
+/* Mobile Navbar */
+@media (max-width: 991.98px) {
+    .navbar-brand h1 {
+        font-size: 1.5rem;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        padding: 10px 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .topbar {
+        display: none !important;
+    }
+}
+
+/* Hero Section Responsive */
+@media (max-width: 767.98px) {
+    .hero-header {
+        padding: 4rem 0 2rem 0 !important;
+        text-align: center;
+    }
+
+    .hero-header h1 {
+        font-size: 2.5rem !important;
+    }
+
+    .hero-header h4 {
+        font-size: 0.9rem !important;
+    }
+
+    .hero-header .btn {
+        padding: 12px 25px !important;
+        margin: 5px !important;
+    }
+
+    .custom-shape-divider-bottom-1689964567 svg {
+        height: 30px;
+    }
+}
+
+/* Page Header Responsive */
+@media (max-width: 767.98px) {
+    .page-header h1 {
+        font-size: 2rem !important;
+    }
+}
+
+/* Blog Card Responsive */
+@media (max-width: 575.98px) {
+    .blog-card {
+        margin-bottom: 20px;
+    }
+
+    .blog-card .blog-img {
+        height: 180px;
+    }
+
+    .blog-card .blog-title {
+        font-size: 18px;
+    }
+}

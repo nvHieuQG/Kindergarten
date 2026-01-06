@@ -28,12 +28,12 @@ class EnrollmentController extends Controller
 
         $enrollment->update($validated);
 
-        return redirect()->back()->with('success', 'Enrollment status updated successfully!');
+        return redirect()->back()->with('success', 'Trạng thái đăng ký đã được cập nhật thành công!');
     }
 
     public function destroy(Enrollment $enrollment)
     {
         $enrollment->delete();
-        return redirect()->route('admin.enrollments.index')->with('success', 'Enrollment deleted successfully!');
+        return redirect()->route('admin.enrollments.index')->with('success', 'Đơn đăng ký đã được xóa thành công!');
     }
 }

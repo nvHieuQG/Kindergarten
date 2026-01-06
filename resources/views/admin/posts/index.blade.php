@@ -14,7 +14,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover table-responsive-stack">
                 <thead class="table-light">
                     <tr>
                         <th>Tiêu đề</th>
@@ -29,21 +29,21 @@
                 <tbody>
                     @forelse($posts as $post)
                     <tr>
-                        <td>
+                        <td data-label="Tiêu đề">
                             <strong>{{ Str::limit($post->title, 50) }}</strong>
                         </td>
-                        <td>
+                        <td data-label="Danh mục">
                             <span class="badge bg-info">{{ $post->category->name }}</span>
                         </td>
-                        <td>{{ $post->user->name }}</td>
-                        <td>
+                        <td data-label="Tác giả">{{ $post->user->name }}</td>
+                        <td data-label="Trạng thái">
                             <span class="badge {{ $post->status == 'published' ? 'bg-success' : 'bg-warning' }}">
                                 {{ ucfirst($post->status) }}
                             </span>
                         </td>
-                        <td>{{ $post->views }}</td>
-                        <td>{{ $post->created_at->format('M d, Y') }}</td>
-                        <td class="table-actions">
+                        <td data-label="Lượt xem">{{ $post->views }}</td>
+                        <td data-label="Ngày">{{ $post->created_at->format('M d, Y') }}</td>
+                        <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-warning" title="Sửa">
                                 <i class="fas fa-edit"></i>
                             </a>

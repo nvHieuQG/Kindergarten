@@ -243,6 +243,66 @@
             background-color: var(--primary);
             color: var(--text-on-primary);
         }
+
+        /* Responsive Improvements */
+        @media (max-width: 767.98px) {
+            .content-wrapper {
+                padding: 1rem;
+            }
+            .header {
+                padding: 0 1rem;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+        }
+
+        /* Stackable Table for Mobile */
+        @media (max-width: 991.98px) {
+            .table-responsive-stack thead {
+                display: none;
+            }
+            .table-responsive-stack tr {
+                display: block;
+                margin-bottom: 1.5rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.75rem;
+                overflow: hidden;
+                background: #fff;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            }
+            .table-responsive-stack td {
+                display: flex;
+                flex-direction: column;
+                padding: 0.75rem 1rem !important;
+                border: none;
+                border-bottom: 1px solid #f3f4f6;
+                text-align: left !important;
+            }
+            .table-responsive-stack td::before {
+                content: attr(data-label);
+                font-weight: 800;
+                text-transform: uppercase;
+                font-size: 0.7rem;
+                color: #6b7280;
+                margin-bottom: 0.25rem;
+                display: block;
+            }
+            .table-responsive-stack td:last-child {
+                border-bottom: none;
+                background: #f9fafb;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 10px;
+            }
+            .table-responsive-stack td:last-child::before {
+                display: none;
+            }
+            .table-actions {
+                display: flex;
+                gap: 5px;
+            }
+        }
     </style>
 
     @stack('styles')
@@ -278,6 +338,10 @@
 
             <a href="{{ route('admin.services.index') }}" class="nav-link {{ request()->routeIs('admin.services.*') ? 'active' : '' }}">
                 <i class="fas fa-concierge-bell"></i> Dịch vụ
+            </a>
+
+            <a href="{{ route('admin.branches.index') }}" class="nav-link {{ request()->routeIs('admin.branches.*') ? 'active' : '' }}">
+                <i class="fas fa-school"></i> Cơ sở
             </a>
 
             <div class="px-3 py-2 text-uppercase text-white-50 small fw-bold mt-2">Quản lý</div>

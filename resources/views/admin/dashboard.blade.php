@@ -88,7 +88,7 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0">
+                    <table class="table table-hover mb-0 table-responsive-stack">
                         <thead class="table-light">
                             <tr>
                                 <th>Tiêu đề</th>
@@ -99,17 +99,17 @@
                         <tbody>
                             @forelse($recentPosts as $post)
                             <tr>
-                                <td>
+                                <td data-label="Tiêu đề">
                                     <a href="{{ route('admin.posts.edit', $post) }}" class="text-decoration-none">
                                         {{ Str::limit($post->title, 40) }}
                                     </a>
                                 </td>
-                                <td>
+                                <td data-label="Trạng thái">
                                     <span class="badge {{ $post->status == 'published' ? 'bg-success' : 'bg-warning' }}">
                                         {{ $post->status }}
                                     </span>
                                 </td>
-                                <td><small>{{ $post->created_at->diffForHumans() }}</small></td>
+                                <td data-label="Ngày"><small>{{ $post->created_at->diffForHumans() }}</small></td>
                             </tr>
                             @empty
                             <tr>
@@ -139,7 +139,7 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0">
+                    <table class="table table-hover mb-0 table-responsive-stack">
                         <thead class="table-light">
                             <tr>
                                 <th>Tên trẻ</th>
@@ -150,13 +150,13 @@
                         <tbody>
                             @forelse($recentEnrollments as $enrollment)
                             <tr>
-                                <td>
+                                <td data-label="Tên trẻ">
                                     <a href="{{ route('admin.enrollments.show', $enrollment) }}" class="text-decoration-none">
                                         {{ $enrollment->child_name }}
                                     </a>
                                 </td>
-                                <td><small>{{ $enrollment->parent_name }}</small></td>
-                                <td>
+                                <td data-label="Phụ huynh"><small>{{ $enrollment->parent_name }}</small></td>
+                                <td data-label="Trạng thái">
                                     <span class="badge 
                                         @if($enrollment->status == 'approved') bg-success
                                         @elseif($enrollment->status == 'pending') bg-warning

@@ -14,7 +14,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle table-responsive-stack">
                 <thead class="table-light">
                     <tr>
                         <th style="width: 50px;">Ảnh</th>
@@ -28,7 +28,7 @@
                 <tbody>
                     @forelse($teachers as $teacher)
                     <tr>
-                        <td>
+                        <td data-label="Ảnh">
                             @if($teacher->photo)
                                 <img src="{{ asset('storage/' . $teacher->photo) }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;">
                             @else
@@ -37,20 +37,20 @@
                                 </div>
                             @endif
                         </td>
-                        <td>
+                        <td data-label="Tên">
                             <strong>{{ $teacher->name }}</strong>
                             @if($teacher->email)
                                 <br><small class="text-muted">{{ $teacher->email }}</small>
                             @endif
                         </td>
-                        <td>{{ $teacher->position }}</td>
-                        <td>
+                        <td data-label="Chức vụ">{{ $teacher->position }}</td>
+                        <td data-label="Trạng thái">
                             <span class="badge {{ $teacher->is_active ? 'bg-success' : 'bg-secondary' }}">
                                 {{ $teacher->is_active ? 'Hoạt động' : 'Không hoạt động' }}
                             </span>
                         </td>
-                        <td>{{ $teacher->order }}</td>
-                        <td class="table-actions">
+                        <td data-label="Thứ tự">{{ $teacher->order }}</td>
+                        <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.teachers.edit', $teacher) }}" class="btn btn-sm btn-warning" title="Sửa">
                                 <i class="fas fa-edit"></i>
                             </a>

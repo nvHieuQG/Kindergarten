@@ -14,7 +14,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle table-responsive-stack">
                 <thead class="table-light">
                     <tr>
                         <th style="width: 100px;">Hình ảnh</th>
@@ -27,7 +27,7 @@
                 <tbody>
                     @forelse($services as $service)
                     <tr>
-                        <td>
+                        <td data-label="Hình ảnh">
                             @if($service->image)
                                 <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->title }}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;">
                             @else
@@ -36,16 +36,16 @@
                                 </div>
                             @endif
                         </td>
-                        <td><strong>{{ $service->title }}</strong></td>
-                        <td>{{ Str::limit($service->description, 50) }}</td>
-                        <td>
+                        <td data-label="Tiêu đề"><strong>{{ $service->title }}</strong></td>
+                        <td data-label="Mô tả">{{ Str::limit($service->description, 50) }}</td>
+                        <td data-label="Icon">
                             @if($service->icon)
                                 <i class="{{ $service->icon }} fa-lg text-primary"></i> <small class="text-muted ms-1">{{ $service->icon }}</small>
                             @else
                                 <span class="text-muted">-</span>
                             @endif
                         </td>
-                        <td class="table-actions">
+                        <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.services.edit', $service) }}" class="btn btn-sm btn-warning" title="Sửa">
                                 <i class="fas fa-edit"></i>
                             </a>

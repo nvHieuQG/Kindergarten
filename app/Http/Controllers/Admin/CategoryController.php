@@ -31,7 +31,7 @@ class CategoryController extends Controller
         Category::create($validated);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category created successfully!');
+            ->with('success', 'Danh mục đã được tạo thành công!');
     }
 
     public function edit(Category $category)
@@ -50,19 +50,19 @@ class CategoryController extends Controller
         $category->update($validated);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category updated successfully!');
+            ->with('success', 'Danh mục đã được cập nhật thành công!');
     }
 
     public function destroy(Category $category)
     {
         if ($category->posts()->count() > 0) {
             return redirect()->route('admin.categories.index')
-                ->with('error', 'Cannot delete category with posts!');
+                ->with('error', 'Không thể xóa danh mục đang có bài viết!');
         }
 
         $category->delete();
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category deleted successfully!');
+            ->with('success', 'Danh mục đã được xóa thành công!');
     }
 }

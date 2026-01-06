@@ -27,6 +27,6 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return redirect()->route('admin.contacts.index')->with('success', 'Contact message deleted successfully!');
+        return redirect()->route('admin.contacts.index')->with('success', 'Tin nhắn liên hệ đã được xóa thành công!');
     }
 }

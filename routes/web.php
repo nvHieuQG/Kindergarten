@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\BranchController;
 use Illuminate\Support\Facades\Route;
 
 // Frontend BabyCare Template Routes
@@ -62,6 +63,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Teachers Management
     Route::resource('teachers', TeacherController::class);
     Route::resource('services', ServiceController::class);
+    Route::resource('branches', BranchController::class);
     // Settings Routes
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');

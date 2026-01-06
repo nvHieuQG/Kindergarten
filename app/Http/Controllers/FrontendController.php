@@ -8,6 +8,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Contact;
 use App\Models\Enrollment;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -17,7 +18,8 @@ class FrontendController extends Controller
         $recentPosts = Post::published()->latest()->take(3)->get();
         $teachers = Teacher::active()->ordered()->take(4)->get();
         $services = Service::latest()->take(4)->get();
-        return view('frontend.home', compact('recentPosts', 'teachers', 'services'));
+        $branches = Branch::active()->ordered()->get();
+        return view('frontend.home', compact('recentPosts', 'teachers', 'services', 'branches'));
     }
 
     public function about()
@@ -66,7 +68,8 @@ class FrontendController extends Controller
 
     public function contact()
     {
-        return view('frontend.contact');
+        $branches = Branch::active()->ordered()->get();
+        return view('frontend.contact', compact('branches'));
     }
 
     public function enrollment()
@@ -85,7 +88,7 @@ class FrontendController extends Controller
 
         Contact::create($validated);
 
-        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+        return redirect()->back()->with('success', 'Tin nhắn của bạn đã được gửi thành công!');
     }
 
     public function storeEnrollment(Request $request)
@@ -104,7 +107,7 @@ class FrontendController extends Controller
 
         Enrollment::create($validated);
 
-        return redirect()->back()->with('success', 'Enrollment application submitted successfully! We will contact you soon.');
+        return redirect()->back()->with('success', 'Đơn đăng ký nhập học đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất có thể.');
     }
 
     public function postDetail($slug)
