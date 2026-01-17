@@ -14,7 +14,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover table-responsive-stack">
+            <table class="table table-hover table-stack">
                 <thead class="table-light">
                     <tr>
                         <th>Tiêu đề</th>
@@ -33,15 +33,19 @@
                             <strong>{{ Str::limit($post->title, 50) }}</strong>
                         </td>
                         <td data-label="Danh mục">
-                            <span class="badge bg-info">{{ $post->category->name }}</span>
+                            <span class="badge bg-info bg-opacity-10 text-info border-0">{{ $post->category->name }}</span>
                         </td>
                         <td data-label="Tác giả">{{ $post->user->name }}</td>
                         <td data-label="Trạng thái">
-                            <span class="badge {{ $post->status == 'published' ? 'bg-success' : 'bg-warning' }}">
+                            <span class="badge {{ $post->status == 'published' ? 'bg-success bg-opacity-10 text-success' : 'bg-warning bg-opacity-10 text-warning' }} border-0">
                                 {{ $post->status == 'published' ? 'Đã xuất bản' : 'Nháp' }}
                             </span>
                         </td>
-                        <td data-label="Lượt xem">{{ $post->views }}</td>
+                        <td data-label="Lượt xem">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-eye me-1 text-muted"></i>{{ $post->views }}
+                            </div>
+                        </td>
                         <td data-label="Ngày">{{ $post->created_at->format('d/m/Y') }}</td>
                         <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-warning" title="Sửa">

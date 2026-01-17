@@ -7,7 +7,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle table-stack">
                 <thead class="table-light">
                     <tr>
                         <th>Tên</th>
@@ -20,18 +20,18 @@
                 <tbody>
                     @forelse($contacts as $contact)
                     <tr class="{{ $contact->status == 'unread' ? 'fw-bold bg-light' : '' }}">
-                        <td>
+                        <td data-label="Tên">
                             {{ $contact->name }}<br>
                             <small class="text-muted fw-normal">{{ $contact->email }}</small>
                         </td>
-                        <td>{{ Str::limit($contact->subject, 50) }}</td>
-                        <td>{{ $contact->created_at->format('d/m/Y H:i') }}</td>
-                        <td>
-                            <span class="badge {{ $contact->status == 'unread' ? 'bg-danger' : 'bg-secondary' }}">
+                        <td data-label="Chủ đề">{{ Str::limit($contact->subject, 50) }}</td>
+                        <td data-label="Ngày">{{ $contact->created_at->format('d/m/Y H:i') }}</td>
+                        <td data-label="Trạng thái">
+                            <span class="badge {{ $contact->status == 'unread' ? 'bg-danger bg-opacity-10 text-danger' : 'bg-secondary bg-opacity-10 text-secondary' }} border-0">
                                 {{ ucfirst($contact->status) == 'Unread' ? 'Chưa đọc' : 'Đã đọc' }}
                             </span>
                         </td>
-                        <td class="table-actions">
+                        <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.contacts.show', $contact) }}" class="btn btn-sm btn-info text-white" title="Đọc tin nhắn">
                                 <i class="fas fa-envelope-open"></i>
                             </a>

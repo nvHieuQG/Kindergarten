@@ -244,6 +244,83 @@
             border-bottom: 1px solid #F1F5F9;
         }
 
+        /* Stack Table Pattern - Responsive */
+        @media (max-width: 768px) {
+            .table-stack,
+            .table-responsive-stack {
+                border: 0;
+            }
+
+            .table-stack thead,
+            .table-responsive-stack thead {
+                display: none;
+            }
+
+            .table-stack tr,
+            .table-responsive-stack tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #E2E8F0;
+                border-radius: var(--radius);
+                background: white;
+                box-shadow: var(--card-shadow);
+                padding: 1rem;
+            }
+
+            .table-stack td,
+            .table-responsive-stack td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem 0;
+                border: none;
+                border-bottom: 1px solid #F1F5F9;
+                text-align: right;
+            }
+
+            .table-stack td:last-child,
+            .table-responsive-stack td:last-child {
+                border-bottom: none;
+            }
+
+            .table-stack td::before,
+            .table-responsive-stack td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.7rem;
+                letter-spacing: 0.05em;
+                color: var(--text-muted);
+                text-align: left;
+                flex: 0 0 40%;
+                padding-right: 1rem;
+            }
+
+            .table-stack td[data-label="Hành động"],
+            .table-responsive-stack td[data-label="Hành động"],
+            .table-stack td.table-actions,
+            .table-responsive-stack td.table-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+
+            .table-stack td[data-label="Hành động"]::before,
+            .table-responsive-stack td[data-label="Hành động"]::before,
+            .table-stack td.table-actions::before,
+            .table-responsive-stack td.table-actions::before {
+                margin-bottom: 0.5rem;
+            }
+
+            .table-stack td[data-label="Hành động"] .d-flex,
+            .table-responsive-stack td[data-label="Hành động"] .d-flex,
+            .table-stack td.table-actions .d-flex,
+            .table-responsive-stack td.table-actions .d-flex {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+        }
+
         /* Buttons */
         .btn-primary {
             background-color: var(--primary);

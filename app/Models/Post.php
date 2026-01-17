@@ -37,16 +37,6 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function approvedComments()
-    {
-        return $this->hasMany(Comment::class)->where('status', 'approved');
-    }
-
     // Scopes
     public function scopePublished($query)
     {

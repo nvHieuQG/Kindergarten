@@ -14,7 +14,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle table-responsive-stack">
+            <table class="table table-hover align-middle table-stack">
                 <thead class="table-light">
                     <tr>
                         <th style="width: 50px;">Ảnh</th>

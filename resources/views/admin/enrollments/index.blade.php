@@ -23,7 +23,7 @@
     <div class="card border-0 shadow-sm animate-up" style="animation-delay: 0.1s">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table class="table table-hover align-middle mb-0 table-stack">
                     <thead>
                         <tr>
                             <th class="ps-4">Thông tin bé</th>
@@ -36,7 +36,7 @@
                     <tbody>
                         @forelse($enrollments as $enrollment)
                             <tr>
-                                <td class="ps-4">
+                                <td class="ps-4" data-label="Thông tin bé">
                                     <div class="d-flex align-items-center">
                                         <div class="bg-primary bg-opacity-10 text-primary rounded-3 d-flex align-items-center justify-content-center me-3"
                                             style="width: 42px; height: 42px;">
@@ -49,18 +49,18 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td data-label="Thông tin phụ huynh">
                                     <div class="fw-semibold text-dark">{{ $enrollment->parent_name }}</div>
                                     <div class="small text-muted"><i
                                             class="fas fa-phone-alt me-1 text-primary"></i>{{ $enrollment->parent_phone }}
                                     </div>
                                 </td>
-                                <td>
+                                <td data-label="Thời gian">
                                     <div class="fw-medium text-dark">{{ $enrollment->created_at->format('d/m/Y') }}</div>
                                     <div class="text-muted extra-small">{{ $enrollment->created_at->format('H:i') }}
                                         ({{ $enrollment->created_at->diffForHumans() }})</div>
                                 </td>
-                                <td>
+                                <td data-label="Trạng thái">
                                     @php
                                         $statusClasses = [
                                             'pending' => 'bg-warning bg-opacity-10 text-warning border-0',
@@ -80,7 +80,7 @@
                                         {{ $statusLabels[$enrollment->status] ?? $enrollment->status }}
                                     </span>
                                 </td>
-                                <td class="text-end pe-4">
+                                <td class="text-end pe-4" data-label="Hành động">
                                     <div class="d-flex justify-content-end gap-2">
                                         <a href="{{ route('admin.enrollments.show', $enrollment) }}"
                                             class="btn btn-icon btn-light btn-sm rounded-circle" title="Xem & Xử lý">

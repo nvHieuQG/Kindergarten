@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Teacher;
 use App\Models\Service;
-use App\Models\Setting;
 use App\Models\Contact;
 use App\Models\Enrollment;
 use App\Models\Branch;
-
-
+use App\Http\Requests\ContactRequest;
+use App\Http\Requests\EnrollmentRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -60,50 +60,66 @@ class FrontendController extends Controller
         return view('frontend.post-detail', compact('post', 'recentPosts'));
     }
 
-    public function storeContact(Request $request)
+    public function storeContact(ContactRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => ['required', 'string', 'regex:/^(0)[0-9]{9}$/'],
-            'message' => 'required|string',
-        ], [
-            'name.required' => 'Vui lòng nhập họ tên.',
-            'phone.required' => 'Vui lòng nhập số điện thoại.',
-            'phone.regex' => 'Số điện thoại không hợp lệ.',
-            'message.required' => 'Vui lòng nhập nội dung cần tư vấn.',
-        ]);
+        try {
+            $validated = $request->validated();
+            
+            // Ensure subject is set (default from prepareForValidation)
+            if (empty($validated['subject'])) {
+                $validated['subject'] = 'Tư vấn từ trang chủ';
+            }
 
-        // Default values for missing fields
-        $validated['email'] = $request->input('email', 'no-email@example.com'); // Placeholder as email is removed from form but required in DB
-        $validated['subject'] = 'Tư vấn từ trang chủ'; // Default subject
+            $contact = Contact::create($validated);
 
-        Contact::create($validated);
+            // Log the contact submission
+            Log::info('New contact submitted', [
+                'id' => $contact->id,
+                'name' => $contact->name,
+                'phone' => $contact->phone,
+                'ip' => $request->ip(),
+            ]);
 
-        return redirect()->back()->with('success', 'Tin nhắn của bạn đã được gửi thành công!');
+            return redirect()->back()->with('success', 'Tin nhắn của bạn đã được gửi thành công!');
+        } catch (\Exception $e) {
+            Log::error('Failed to store contact', [
+                'error' => $e->getMessage(),
+                'data' => $request->except(['_token']),
+            ]);
+
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Đã xảy ra lỗi khi gửi tin nhắn. Vui lòng thử lại sau.');
+        }
     }
 
-    public function storeEnrollment(Request $request)
+    public function storeEnrollment(EnrollmentRequest $request)
     {
-        $validated = $request->validate([
-            'child_name' => 'required|string|max:255',
-            'child_dob_year' => 'required|integer|min:2018|max:' . date('Y'),
-            'parent_name' => 'required|string|max:255',
-            'parent_phone' => ['required', 'string', 'regex:/^(0)[0-9]{9}$/'], // 10 digits starting with 0
-            'program' => 'nullable|string|max:255',
-        ], [
-            'parent_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng số 0.',
-            'child_dob_year.min' => 'Năm sinh không hợp lệ.',
-            'child_dob_year.max' => 'Năm sinh không hợp lệ.',
-            'required' => 'Vui lòng nhập thông tin này.',
-        ]);
+        try {
+            $validated = $request->validated();
 
-        // Convert year to a valid date for child_dob
-        $validated['child_dob'] = $request->child_dob_year . '-01-01';
-        unset($validated['child_dob_year']);
+            $enrollment = Enrollment::create($validated);
 
-        Enrollment::create($validated);
+            // Log the enrollment submission
+            Log::info('New enrollment submitted', [
+                'id' => $enrollment->id,
+                'child_name' => $enrollment->child_name,
+                'parent_name' => $enrollment->parent_name,
+                'parent_phone' => $enrollment->parent_phone,
+                'ip' => $request->ip(),
+            ]);
 
-        return redirect()->back()->with('success', 'Đơn đăng ký tư vấn đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn trong vòng 24h.');
+            return redirect()->back()->with('success', 'Đơn đăng ký tư vấn đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn trong vòng 24h.');
+        } catch (\Exception $e) {
+            Log::error('Failed to store enrollment', [
+                'error' => $e->getMessage(),
+                'data' => $request->except(['_token', 'child_dob_year']),
+            ]);
+
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Đã xảy ra lỗi khi gửi đơn đăng ký. Vui lòng thử lại sau.');
+        }
     }
 
 

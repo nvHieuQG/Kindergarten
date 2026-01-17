@@ -15,7 +15,7 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle mb-0 table-stack">
                         <thead class="bg-light text-secondary">
                             <tr>
                                 <th class="ps-4">Họ tên</th>
@@ -28,7 +28,7 @@
                         <tbody>
                             @forelse($users as $user)
                             <tr>
-                                <td class="ps-4">
+                                <td class="ps-4" data-label="Họ tên">
                                     <div class="d-flex align-items-center">
                                         <div class="{{ $user->is_active ? 'bg-primary bg-opacity-10 text-primary' : 'bg-danger bg-opacity-10 text-danger' }} rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
                                             <i class="fas {{ $user->is_active ? 'fa-user' : 'fa-user-lock' }}"></i>
@@ -41,16 +41,16 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $user->email }}</td>
-                                <td>
+                                <td data-label="Email">{{ $user->email }}</td>
+                                <td data-label="Trạng thái">
                                     @if($user->is_active)
                                         <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">Hoạt động</span>
                                     @else
                                         <span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">Vô hiệu hóa</span>
                                     @endif
                                 </td>
-                                <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                                <td class="text-end pe-4">
+                                <td data-label="Ngày tạo">{{ $user->created_at->format('d/m/Y') }}</td>
+                                <td class="text-end pe-4" data-label="Hành động">
                                     <div class="d-flex justify-content-end gap-2">
                                         @if($user->id !== auth()->id())
                                         <form action="{{ route('admin.users.status', $user) }}" method="POST">

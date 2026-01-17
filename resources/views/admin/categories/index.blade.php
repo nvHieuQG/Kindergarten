@@ -14,7 +14,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover table-stack">
                 <thead class="table-light">
                     <tr>
                         <th>Tên</th>
@@ -27,11 +27,11 @@
                 <tbody>
                     @forelse($categories as $category)
                     <tr>
-                        <td><strong>{{ $category->name }}</strong></td>
-                        <td><code>{{ $category->slug }}</code></td>
-                        <td><span class="badge bg-info">{{ $category->posts_count }} bài viết</span></td>
-                        <td>{{ $category->created_at->format('d/m/Y') }}</td>
-                        <td class="table-actions">
+                        <td data-label="Tên"><strong>{{ $category->name }}</strong></td>
+                        <td data-label="Slug"><code>{{ $category->slug }}</code></td>
+                        <td data-label="Số bài viết"><span class="badge bg-info bg-opacity-10 text-info border-0">{{ $category->posts_count }} bài viết</span></td>
+                        <td data-label="Ngày tạo">{{ $category->created_at->format('d/m/Y') }}</td>
+                        <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-sm btn-warning">
                                 <i class="fas fa-edit"></i>
                             </a>
