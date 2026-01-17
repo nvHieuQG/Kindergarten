@@ -9,6 +9,8 @@ use App\Models\Setting;
 use App\Models\Contact;
 use App\Models\Enrollment;
 use App\Models\Branch;
+
+
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -19,25 +21,9 @@ class FrontendController extends Controller
         $teachers = Teacher::active()->ordered()->take(4)->get();
         $services = Service::latest()->take(4)->get();
         $branches = Branch::active()->ordered()->get();
+
         return view('frontend.home', compact('recentPosts', 'teachers', 'services', 'branches'));
     }
-
-    public function about()
-    {
-        $teachers = Teacher::active()->ordered()->take(4)->get();
-        return view('frontend.about', compact('teachers'));
-    }
-
-    public function services()
-    {
-        return view('frontend.service');
-    }
-
-    public function programs()
-    {
-        return view('frontend.program');
-    }
-
 
     public function blog(Request $request)
     {
@@ -51,63 +37,15 @@ class FrontendController extends Controller
             });
         }
 
+        if ($request->has('category')) {
+            $slug = $request->get('category');
+            $query->whereHas('category', function ($q) use ($slug) {
+                $q->where('slug', $slug);
+            });
+        }
+
         $posts = $query->latest()->paginate(9);
         return view('frontend.blog', compact('posts'));
-    }
-
-    public function team()
-    {
-        $teachers = Teacher::active()->ordered()->get();
-        return view('frontend.team', compact('teachers'));
-    }
-
-    public function testimonials()
-    {
-        return view('frontend.testimonial');
-    }
-
-    public function contact()
-    {
-        $branches = Branch::active()->ordered()->get();
-        return view('frontend.contact', compact('branches'));
-    }
-
-    public function enrollment()
-    {
-        return view('frontend.enrollment');
-    }
-
-    public function storeContact(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string',
-        ]);
-
-        Contact::create($validated);
-
-        return redirect()->back()->with('success', 'Tin nhắn của bạn đã được gửi thành công!');
-    }
-
-    public function storeEnrollment(Request $request)
-    {
-        $validated = $request->validate([
-            'child_name' => 'required|string|max:255',
-            'child_dob' => 'nullable|date',
-            'child_gender' => 'required|in:male,female,other',
-            'parent_name' => 'nullable|string|max:255',
-
-            'parent_phone' => 'nullable|string|max:20',
-            'address' => 'nullable|string|max:255',
-            'program' => 'nullable|string|max:255',
-            'message' => 'nullable|string',
-        ]);
-
-        Enrollment::create($validated);
-
-        return redirect()->back()->with('success', 'Đơn đăng ký nhập học đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất có thể.');
     }
 
     public function postDetail($slug)
@@ -121,4 +59,52 @@ class FrontendController extends Controller
 
         return view('frontend.post-detail', compact('post', 'recentPosts'));
     }
+
+    public function storeContact(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => ['required', 'string', 'regex:/^(0)[0-9]{9}$/'],
+            'message' => 'required|string',
+        ], [
+            'name.required' => 'Vui lòng nhập họ tên.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'phone.regex' => 'Số điện thoại không hợp lệ.',
+            'message.required' => 'Vui lòng nhập nội dung cần tư vấn.',
+        ]);
+
+        // Default values for missing fields
+        $validated['email'] = $request->input('email', 'no-email@example.com'); // Placeholder as email is removed from form but required in DB
+        $validated['subject'] = 'Tư vấn từ trang chủ'; // Default subject
+
+        Contact::create($validated);
+
+        return redirect()->back()->with('success', 'Tin nhắn của bạn đã được gửi thành công!');
+    }
+
+    public function storeEnrollment(Request $request)
+    {
+        $validated = $request->validate([
+            'child_name' => 'required|string|max:255',
+            'child_dob_year' => 'required|integer|min:2018|max:' . date('Y'),
+            'parent_name' => 'required|string|max:255',
+            'parent_phone' => ['required', 'string', 'regex:/^(0)[0-9]{9}$/'], // 10 digits starting with 0
+            'program' => 'nullable|string|max:255',
+        ], [
+            'parent_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng số 0.',
+            'child_dob_year.min' => 'Năm sinh không hợp lệ.',
+            'child_dob_year.max' => 'Năm sinh không hợp lệ.',
+            'required' => 'Vui lòng nhập thông tin này.',
+        ]);
+
+        // Convert year to a valid date for child_dob
+        $validated['child_dob'] = $request->child_dob_year . '-01-01';
+        unset($validated['child_dob_year']);
+
+        Enrollment::create($validated);
+
+        return redirect()->back()->with('success', 'Đơn đăng ký tư vấn đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn trong vòng 24h.');
+    }
+
+
 }

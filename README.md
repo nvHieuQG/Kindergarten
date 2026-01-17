@@ -1,59 +1,215 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎓 Hệ thống Quản lý Trường Mầm Non Hoa Hướng Dương
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website quản lý trường mẫu giáo được xây dựng bằng Laravel 12 và TailwindCSS.
 
-## About Laravel
+## 📋 Tính năng
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Frontend (Trang công khai)
+- ✅ Trang chủ với thông tin trường
+- ✅ Giới thiệu về trường
+- ✅ Blog/Tin tức
+- ✅ Danh sách giáo viên
+- ✅ Dịch vụ và chương trình học
+- ✅ Form liên hệ
+- ✅ Form đăng ký nhập học
+- ✅ Thông tin chi nhánh
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Admin Panel
+- ✅ Dashboard với thống kê tổng quan
+- ✅ Quản lý bài viết (CRUD)
+- ✅ Quản lý danh mục
+- ✅ Quản lý giáo viên
+- ✅ Quản lý dịch vụ
+- ✅ Quản lý chi nhánh
+- ✅ Quản lý đơn đăng ký nhập học
+- ✅ Quản lý tin nhắn liên hệ
+- ✅ Quản lý bình luận
+- ✅ Cài đặt hệ thống
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔐 Xác thực & Phân quyền
+- ✅ **Chỉ Admin** mới có thể đăng nhập
+- ❌ **Không cho phép** user thường đăng ký
+- ✅ Phụ huynh **KHÔNG CẦN** đăng nhập để xem thông tin hoặc gửi form
+- ✅ Quản lý tài khoản admin qua Seeder hoặc Tinker
 
-## Learning Laravel
+## 🛠️ Công nghệ sử dụng
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Backend:** Laravel 12, PHP 8.2+
+- **Frontend:** Blade Templates, TailwindCSS, Alpine.js
+- **Database:** MySQL/MariaDB
+- **Authentication:** Laravel Breeze
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📦 Cài đặt (Development)
 
-## Laravel Sponsors
+### Yêu cầu hệ thống
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL/MariaDB
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Các bước cài đặt
 
-### Premium Partners
+1. **Clone repository**
+```bash
+git clone https://github.com/your-username/kindergarten.git
+cd kindergarten
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. **Cài đặt dependencies**
+```bash
+composer install
+npm install
+```
 
-## Contributing
+3. **Cấu hình môi trường**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Cấu hình database trong file `.env`**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kindergarten
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Code of Conduct
+5. **Chạy migrations và seeders**
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. **Tạo symbolic link cho storage**
+```bash
+php artisan storage:link
+```
 
-## Security Vulnerabilities
+7. **Build assets**
+```bash
+npm run dev
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+8. **Chạy server**
+```bash
+php artisan serve
+```
 
-## License
+Website sẽ chạy tại: `http://localhost:8000`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🔐 Tài khoản Admin
+
+### ⚠️ Lưu ý quan trọng
+- ❌ **Không cho phép** user thường đăng ký tài khoản
+- ✅ **Chỉ Admin** mới có thể đăng nhập vào hệ thống
+- ✅ Phụ huynh có thể xem thông tin và gửi form **KHÔNG CẦN** đăng nhập
+- ✅ Route `/register` đã bị **vô hiệu hóa**
+
+### Tài khoản Admin mặc định (Development)
+
+**⚠️ CHỈ SỬ DỤNG TRÊN MÔI TRƯỜNG DEVELOPMENT**
+
+```
+Email: admin@kindergarten.com
+Password: 111111
+```
+
+### Tạo Admin mới
+
+**Cách 1: Sử dụng Seeder (Khuyến nghị)**
+
+Chỉnh sửa file `.env`:
+```env
+ADMIN_NAME="Tên quản trị viên"
+ADMIN_EMAIL="email-bao-mat@yourdomain.com"
+ADMIN_PASSWORD="MatKhauCucManh@2026!"
+```
+
+Sau đó chạy:
+```bash
+php artisan db:seed --class=AdminUserSeeder
+```
+
+**📖 Xem thêm:** [ADMIN_GUIDE.md](./ADMIN_GUIDE.md) - Hướng dẫn chi tiết về quản lý tài khoản Admin
+
+## 🚀 Deploy lên Production
+
+**📖 Đọc kỹ file `DEPLOYMENT_GUIDE.md` trước khi deploy!**
+
+Các bước quan trọng:
+1. ✅ Đổi `ADMIN_EMAIL` và `ADMIN_PASSWORD` trong `.env`
+2. ✅ Đặt `APP_ENV=production`
+3. ✅ Đặt `APP_DEBUG=false`
+4. ✅ Cấu hình database production
+5. ✅ Chạy migrations và seeders
+6. ✅ Tối ưu hóa cache
+
+Chi tiết xem tại: [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+
+## 📁 Cấu trúc thư mục
+
+```
+kindergarten/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── Admin/          # Controllers cho admin panel
+│   │   ├── Auth/           # Controllers xác thực
+│   │   └── FrontendController.php
+│   └── Models/             # Eloquent models
+├── database/
+│   ├── migrations/         # Database migrations
+│   └── seeders/           # Database seeders
+├── resources/
+│   └── views/
+│       ├── admin/         # Views cho admin panel
+│       ├── frontend/      # Views cho trang công khai
+│       └── layouts/       # Layout templates
+├── routes/
+│   ├── web.php           # Web routes
+│   └── auth.php          # Authentication routes
+└── public/
+    └── assets/           # Static assets (images, css, js)
+```
+
+## 🔒 Bảo mật
+
+### File `.env`
+- ❌ **KHÔNG BAO GIỜ** commit file `.env` lên Git
+- ✅ File `.env` đã được thêm vào `.gitignore`
+- ✅ Sử dụng `.env.example` làm template
+
+### Tài khoản Admin
+- ❌ **KHÔNG** sử dụng password yếu như "111111", "123456"
+- ✅ Sử dụng password mạnh: ít nhất 12 ký tự, có chữ hoa, chữ thường, số, ký tự đặc biệt
+- ✅ Đổi password định kỳ
+
+### Production
+- ✅ Đặt `APP_DEBUG=false`
+- ✅ Sử dụng HTTPS
+- ✅ Cấu hình CORS đúng cách
+- ✅ Backup database thường xuyên
+
+## 🧪 Testing
+
+Chạy tests:
+```bash
+php artisan test
+```
+
+## 📝 License
+
+MIT License
+
+## 👥 Liên hệ
+
+- Website: https://yourdomain.com
+- Email: contact@yourdomain.com
+
+---
+
+**⚠️ LƯU Ý QUAN TRỌNG:**
+
+Trước khi deploy lên production, hãy đọc kỹ file [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) để đảm bảo bảo mật tài khoản admin và cấu hình đúng cách!

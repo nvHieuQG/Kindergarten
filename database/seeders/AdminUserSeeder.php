@@ -12,18 +12,24 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
+        $adminEmail = env('ADMIN_EMAIL', 'admin@kindergarten.com');
+        $adminPassword = env('ADMIN_PASSWORD', '111111');
+        $adminName = env('ADMIN_NAME', 'Admin');
+
         \App\Models\User::firstOrCreate(
-            ['email' => 'admin@kindergarten.com'],
+            ['email' => $adminEmail],
             [
-                'name' => 'Admin',
-                'password' => bcrypt('111111'),
+                'name' => $adminName,
+                'password' => bcrypt($adminPassword),
                 'role' => 'admin',
                 'email_verified_at' => now(),
             ]
         );
 
-        echo "Admin user created successfully!\n";
-        echo "Email: admin@kindergarten.com\n";
-        echo "Password: 111111\n";
+        echo "✅ Admin user created successfully!\n";
+        echo "📧 Email: {$adminEmail}\n";
+        echo "🔑 Password: {$adminPassword}\n";
+        echo "\n";
+        echo "⚠️  IMPORTANT: Change ADMIN_EMAIL and ADMIN_PASSWORD in .env file before deploying to production!\n";
     }
 }

@@ -25,7 +25,7 @@
                             <small class="text-muted fw-normal">{{ $contact->email }}</small>
                         </td>
                         <td>{{ Str::limit($contact->subject, 50) }}</td>
-                        <td>{{ $contact->created_at->format('M d, Y H:i') }}</td>
+                        <td>{{ $contact->created_at->format('d/m/Y H:i') }}</td>
                         <td>
                             <span class="badge {{ $contact->status == 'unread' ? 'bg-danger' : 'bg-secondary' }}">
                                 {{ ucfirst($contact->status) == 'Unread' ? 'Chưa đọc' : 'Đã đọc' }}

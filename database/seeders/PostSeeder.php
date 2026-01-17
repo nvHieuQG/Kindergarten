@@ -52,16 +52,18 @@ class PostSeeder extends Seeder
 
         foreach ($posts as $postData) {
             $category = $categories->random();
-            \App\Models\Post::create([
-                'title' => $postData['title'],
-                'slug' => \Illuminate\Support\Str::slug($postData['title']),
-                'excerpt' => $postData['excerpt'],
-                'content' => $postData['content'],
-                'category_id' => $category->id,
-                'user_id' => 1, // Assuming admin user with ID 1 exists
-                'status' => 'published',
-                'featured_image' => null, // Or add a default image path if available
-            ]);
+            \App\Models\Post::firstOrCreate(
+                ['slug' => \Illuminate\Support\Str::slug($postData['title'])],
+                [
+                    'title' => $postData['title'],
+                    'excerpt' => $postData['excerpt'],
+                    'content' => $postData['content'],
+                    'category_id' => $category->id,
+                    'user_id' => 1, // Assuming admin user with ID 1 exists
+                    'status' => 'published',
+                    'featured_image' => null, // Or add a default image path if available
+                ]
+            );
         }
     }
 }

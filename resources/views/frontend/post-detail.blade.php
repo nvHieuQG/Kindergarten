@@ -6,81 +6,110 @@
     <x-page-header :title="$post->title" active="Chi tiết bài viết" />
 
     <!-- Post Detail Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 bg-light">
         <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-8">
-                    <!-- Post Content -->
-                    <div class="mb-5 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="overflow-hidden img-border-radius mb-4">
-                            <img src="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('assets/img/blog-1.jpg') }}" class="img-fluid w-100" alt="{{ $post->title }}">
+            <div class="row g-5 justify-content-center">
+                <!-- Main Content -->
+                <div class="col-lg-9">
+                    <!-- Post Content Card -->
+                    <div class="bg-white rounded-4 shadow-sm overflow-hidden p-4 p-md-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                        
+                        <!-- Post Header -->
+                        <div class="text-center mb-5">
+                            <h1 class="display-6 fw-bold mb-3 text-dark">{{ $post->title }}</h1>
+                            <div class="d-flex justify-content-center text-muted small">
+                                <span class="me-3"><i class="far fa-calendar-alt me-1"></i> {{ $post->created_at->format('d/m/Y') }}</span>
+                                <span class="me-3"><i class="far fa-user me-1"></i> {{ $post->user->name ?? 'Admin' }}</span>
+                                <span class="me-3"><i class="far fa-eye me-1"></i> {{ number_format($post->views) }} lượt xem</span>
+                                <span><i class="far fa-folder-open me-1"></i> {{ $post->category->name ?? 'Tin tức' }}</span>
+                            </div>
                         </div>
-                        <div class="d-flex mb-4">
-                            <small class="me-3 text-muted"><i class="fa fa-user text-primary me-2"></i>{{ $post->user->name ?? 'Admin' }}</small>
-                            <small class="me-3 text-muted"><i class="fa fa-folder text-primary me-2"></i>{{ $post->category->name ?? 'Tin tức' }}</small>
-                            <small class="me-3 text-muted"><i class="fa fa-calendar text-primary me-2"></i>{{ $post->created_at->format('d/m/Y') }}</small>
-                            <small class="me-3 text-muted"><i class="fa fa-eye text-primary me-2"></i>{{ $post->views }} lượt xem</small>
+
+                        <!-- Featured Image -->
+                        @if($post->featured_image)
+                        <div class="mb-5 rounded-4 overflow-hidden position-relative" style="max-height: 500px;">
+                            <img src="{{ asset('storage/' . $post->featured_image) }}" 
+                                 class="img-fluid w-100 object-fit-cover" 
+                                 alt="{{ $post->title }}">
                         </div>
-                        <h1 class="display-5 mb-4">{{ $post->title }}</h1>
-                        <style>
-                            .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
-                            .post-content figure.media { width: 100%; margin: 20px 0; }
-                            .post-content figure.media iframe { width: 100%; min-height: 400px; border-radius: 10px; }
-                            .post-content table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
-                            .post-content table td, .post-content table th { border: 1px solid #dee2e6; padding: .75rem; }
-                        </style>
-                        <div class="post-content">
+                        @else 
+                        <!-- If no image, maybe show a default or skip -->
+                        <div class="mb-5 rounded-4 overflow-hidden position-relative" style="max-height: 500px;">
+                             <img src="{{ asset('assets/img/blog-1.jpg') }}" class="img-fluid w-100 object-fit-cover" alt="Default Image">
+                        </div>
+                        @endif
+
+                        <!-- Excerpt (Lead Text) -->
+                        @if($post->excerpt)
+                        <p class="lead fw-medium text-dark fst-italic mb-4 px-lg-5 text-center">{{ $post->excerpt }}</p>
+                        @endif
+
+                        <!-- Post Content -->
+                        <div class="post-content fs-6 lh-lg text-dark">
                             {!! $post->content !!}
                         </div>
-                    </div>
 
-                    <!-- Author Box -->
-                    <div class="d-flex bg-light p-4 rounded mb-5 wow fadeIn" data-wow-delay="0.1s">
-                        <img src="{{ asset('assets/img/program-teacher.jpg') }}" class="img-fluid rounded-circle p-2 border border-primary bg-white" alt="" style="width: 100px; height: 100px;">
-                        <div class="ms-4">
-                            <h4 class="text-primary">{{ $post->user->name ?? 'Cán bộ nhà trường' }}</h4>
-                            <p class="mb-0 text-muted">Chào mừng bạn đến với chuyên mục Tin tức & Thông báo của trường mầm non Hoa Hướng Dương. Chúng tôi luôn cập nhật những thông tin mới nhất về hoạt động và chương trình học của các con.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <!-- Sidebar -->
-                    <div class="wow fadeIn" data-wow-delay="0.1s">
-                        <!-- Search Form -->
-                        <div class="mb-5">
-                            <form action="{{ route('blog') }}" method="GET">
-                                <div class="input-group">
-                                    <input type="text" name="search" class="form-control p-3" placeholder="Tìm kiếm bài viết...">
-                                    <button type="submit" class="btn btn-primary px-3"><i class="fa fa-search"></i></button>
+                        <!-- Share & Tags -->
+                        <div class="mt-5 pt-4 border-top">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="d-flex align-items-center mb-3 mb-md-0">
+                                    <span class="fw-bold me-3">Chia sẻ:</span>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('blog.show', $post->slug)) }}" target="_blank" class="btn btn-outline-primary btn-sm rounded-circle me-2" style="width: 35px; height: 35px; line-height: 25px;"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('blog.show', $post->slug)) }}&text={{ urlencode($post->title) }}" target="_blank" class="btn btn-outline-info btn-sm rounded-circle me-2" style="width: 35px; height: 35px; line-height: 25px;"><i class="fab fa-twitter"></i></a>
+                                    <button onclick="copyToClipboard('{{ route('blog.show', $post->slug) }}')" class="btn btn-outline-secondary btn-sm rounded-circle" style="width: 35px; height: 35px; line-height: 25px;"><i class="fa fa-link"></i></button>
                                 </div>
-                            </form>
+                                <a href="{{ route('blog') }}" class="btn btn-link text-decoration-none text-muted"><i class="fa fa-arrow-left me-1"></i> Quay lại tin tức</a>
+                            </div>
                         </div>
+                    </div>
 
-                        <!-- Recent Post -->
-                        <div class="mb-5">
-                            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Bài viết gần đây</h4>
+                    <!-- Related/Recent Posts (Moved to bottom, simplified) -->
+                    @if($recentPosts->count() > 0)
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <h4 class="mb-4 fw-bold text-dark">Bài viết liên quan</h4>
+                        <div class="row g-4">
                             @foreach($recentPosts as $recent)
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="{{ $recent->featured_image ? asset('storage/' . $recent->featured_image) : asset('assets/img/blog-1.jpg') }}" class="img-fluid rounded" style="width: 80px; height: 80px; object-fit: cover;" alt="">
-                                <div class="ms-3">
-                                    <a href="{{ route('blog.show', $recent->slug) }}" class="h6 mb-2 d-block">{{ Str::limit($recent->title, 40) }}</a>
-                                    <small class="text-muted"><i class="fa fa-calendar text-primary me-2"></i>{{ $recent->created_at->format('d/m/Y') }}</small>
+                            <div class="col-md-4">
+                                <div class="bg-white rounded-4 shadow-sm h-100 overflow-hidden">
+                                    <div class="position-relative" style="height: 180px;">
+                                        <a href="{{ route('blog.show', $recent->slug) }}" class="d-block w-100 h-100">
+                                            <img src="{{ $recent->featured_image ? asset('storage/' . $recent->featured_image) : asset('assets/img/blog-1.jpg') }}" 
+                                                class="img-fluid w-100 h-100 object-fit-cover transition-hover" alt="{{ $recent->title }}">
+                                        </a>
+                                    </div>
+                                    <div class="p-3">
+                                        <small class="text-muted d-block mb-1"><i class="fa fa-calendar-alt me-1"></i> {{ $recent->created_at->format('d/m/Y') }}</small>
+                                        <a href="{{ route('blog.show', $recent->slug) }}" class="h6 text-decoration-none text-dark fw-bold d-block text-truncate">{{ $recent->title }}</a>
+                                    </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
-
-                        <!-- Sidebar Banner -->
-                        <div class="bg-primary img-border-radius p-4 text-center">
-                            <h4 class="text-white mb-3">Bạn cần tư vấn?</h4>
-                            <p class="text-white mb-4">Hãy đăng ký nhập học để chúng tôi có thể tư vấn chi tiết hơn cho bạn về chương trình học.</p>
-                            <a href="{{ route('enrollment') }}" class="btn btn-light px-4 py-2 btn-border-radius">Đăng ký ngay</a>
-                        </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
     <!-- Post Detail End -->
+
+    <!-- Custom Styles -->
+    <style>
+        .post-content img { max-width: 100%; height: auto; border-radius: 10px; margin: 20px 0; }
+        .post-content h2, .post-content h3 { margin-top: 25px; margin-bottom: 15px; color: #2c3e50; font-weight: bold; }
+        .post-content p { margin-bottom: 15px; }
+        .post-content ul, .post-content ol { padding-left: 20px; margin-bottom: 15px; }
+        .post-content blockquote { border-left: 4px solid #FE6F61; padding: 15px 20px; background: #f8f9fa; margin: 20px 0; border-radius: 4px; font-style: italic; }
+        .object-fit-cover { object-fit: cover; }
+    </style>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Đã copy link bài viết!');
+            }, function(err) {
+                console.error('Không thể copy: ', err);
+            });
+        }
+    </script>
 @endsection

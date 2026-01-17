@@ -114,7 +114,7 @@
                     <li class="mb-2"><strong>Lượt xem:</strong> {{ $post->views }}</li>
                     <li class="mb-2"><strong>Bình luận:</strong> {{ $post->comments->count() }}</li>
                     <li class="mb-2"><strong>Tác giả:</strong> {{ $post->user->name }}</li>
-                    <li class="mb-2"><strong>Ngày tạo:</strong> {{ $post->created_at->format('M d, Y') }}</li>
+                    <li class="mb-2"><strong>Ngày tạo:</strong> {{ $post->created_at->format('d/m/Y') }}</li>
                     <li><strong>Cập nhật:</strong> {{ $post->updated_at->diffForHumans() }}</li>
                 </ul>
             </div>

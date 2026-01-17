@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="fw-bold text-muted">Ngày sinh</label>
-                        <p>{{ $enrollment->child_dob ? \Carbon\Carbon::parse($enrollment->child_dob)->format('M d, Y') : 'N/A' }}</p>
+                        <p>{{ $enrollment->child_dob ? \Carbon\Carbon::parse($enrollment->child_dob)->format('d/m/Y') : 'N/A' }}</p>
                     </div>
                 </div>
                 <div class="row mb-3">

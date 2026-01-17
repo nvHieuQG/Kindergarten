@@ -12,8 +12,15 @@
     spinner(0);
 
 
-    // Initiate the wowjs
-    new WOW().init();
+    // Initiate the wowjs - Faster animation
+    new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        offset: 50,          // Giảm từ 0 xuống 50 để animation trigger sớm hơn
+        mobile: true,        // Enable trên mobile
+        live: true,
+        scrollContainer: null
+    }).init();
 
 
     // Back to top button
@@ -22,6 +29,13 @@
             $('.back-to-top').fadeIn('slow');
         } else {
             $('.back-to-top').fadeOut('slow');
+        }
+
+        // Add scrolled class to navbar
+        if ($(this).scrollTop() > 50) {
+            $('.navbar-light').addClass('scrolled');
+        } else {
+            $('.navbar-light').removeClass('scrolled');
         }
     });
     $('.back-to-top').click(function () {
@@ -66,16 +80,17 @@
         $('.btn-play').click(function () {
             $videoSrc = $(this).data("src");
         });
-        console.log($videoSrc);
 
         $('#videoModal').on('shown.bs.modal', function (e) {
             var $src = $videoSrc;
-            if ($src.includes("watch?v=")) {
+            if ($src && $src.includes("watch?v=")) {
                 $src = $src.replace("watch?v=", "embed/");
-            } else if ($src.includes("youtu.be/")) {
+            } else if ($src && $src.includes("youtu.be/")) {
                 $src = $src.replace("youtu.be/", "youtube.com/embed/");
             }
-            $("#video").attr('src', $src + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+            if ($src) {
+                $("#video").attr('src', $src + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+            }
         })
 
         $('#videoModal').on('hide.bs.modal', function (e) {

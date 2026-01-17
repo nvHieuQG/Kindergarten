@@ -38,11 +38,11 @@
                         <td data-label="Tác giả">{{ $post->user->name }}</td>
                         <td data-label="Trạng thái">
                             <span class="badge {{ $post->status == 'published' ? 'bg-success' : 'bg-warning' }}">
-                                {{ ucfirst($post->status) }}
+                                {{ $post->status == 'published' ? 'Đã xuất bản' : 'Nháp' }}
                             </span>
                         </td>
                         <td data-label="Lượt xem">{{ $post->views }}</td>
-                        <td data-label="Ngày">{{ $post->created_at->format('M d, Y') }}</td>
+                        <td data-label="Ngày">{{ $post->created_at->format('d/m/Y') }}</td>
                         <td data-label="Hành động" class="table-actions">
                             <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-warning" title="Sửa">
                                 <i class="fas fa-edit"></i>

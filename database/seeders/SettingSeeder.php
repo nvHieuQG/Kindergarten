@@ -30,6 +30,9 @@ class SettingSeeder extends Seeder
                 'type' => 'image',
             ],
             ['key' => 'hero_image', 'value' => 'assets/img/hero-img.jpg', 'type' => 'image'],
+            ['key' => 'hero_title', 'value' => 'Nơi Ươm Mầm Thiên Tài Nhỏ', 'type' => 'text'],
+            ['key' => 'hero_subtitle', 'value' => 'Môi trường an toàn, giáo viên tận tâm, chương trình giáo dục hiện đại giúp bé phát triển toàn diện cả về trí tuệ và cảm xúc.', 'type' => 'textarea'],
+            ['key' => 'hero_form_title', 'value' => 'Đăng ký tư vấn', 'type' => 'text'],
 
             // Contact Info
             ['key' => 'site_address', 'value' => '123 Street, New York, USA', 'type' => 'text'],

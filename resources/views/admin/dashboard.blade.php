@@ -4,223 +4,197 @@
 @section('page-title', 'Bảng điều khiển')
 
 @section('content')
-<div class="row g-4 mb-4">
-    <!-- Posts Stats -->
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
+    <div class="row g-4 mb-5 animate-up">
+        <div class="col-12">
+            <div
+                class="p-4 rounded-4 bg-white border border-primary border-opacity-10 shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <div class="text-muted small mb-1">Tổng số bài viết</div>
-                    <h3 class="mb-0">{{ $stats['total_posts'] }}</h3>
-                    <small class="text-success">
-                        <i class="fas fa-check-circle"></i> {{ $stats['published_posts'] }} đã xuất bản
-                    </small>
+                    <h3 class="fw-bold mb-1">Chào mừng trở lại, {{ auth()->user()->name }}! 👋</h3>
+                    <p class="text-muted mb-0">Hôm nay là {{ now()->translatedFormat('l, d/m/Y') }}. Đây là tóm tắt tình hình
+                        nhà trường.</p>
                 </div>
-                <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                <div class="d-none d-md-block">
+                    <a href="{{ route('home') }}" target="_blank"
+                        class="btn btn-outline-primary fw-semibold px-4 rounded-pill">
+                        <i class="fas fa-external-link-alt me-2"></i>Xem trang chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <!-- Posts Stats -->
+        <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.1s">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper bg-primary bg-opacity-10 text-primary">
                     <i class="fas fa-newspaper"></i>
                 </div>
+                <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Bài viết</div>
+                <h2 class="fw-bold mb-2">{{ $stats['total_posts'] }}</h2>
+                <div class="d-flex align-items-center">
+                    <span
+                        class="badge bg-success bg-opacity-10 text-success small border-0 me-2">{{ $stats['published_posts'] }}</span>
+                    <span class="text-muted small">Đã xuất bản</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teachers Stats -->
+        <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.2s">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper bg-success bg-opacity-10 text-success">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Giáo viên</div>
+                <h2 class="fw-bold mb-2">{{ $stats['total_teachers'] }}</h2>
+                <div class="d-flex align-items-center">
+                    <span
+                        class="badge bg-success bg-opacity-10 text-success small border-0 me-2">{{ $stats['active_teachers'] }}</span>
+                    <span class="text-muted small">Đang công tác</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enrollments Stats -->
+        <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.3s">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper bg-warning bg-opacity-10 text-warning">
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Yêu cầu tư vấn</div>
+                <h2 class="fw-bold mb-2">{{ $stats['total_enrollments'] }}</h2>
+                <div class="d-flex align-items-center">
+                    <span
+                        class="badge bg-warning bg-opacity-10 text-warning small border-0 me-2">{{ $stats['pending_enrollments'] }}</span>
+                    <span class="text-muted small">Đang chờ xử lý</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts Stats -->
+        <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.4s">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper bg-danger bg-opacity-10 text-danger">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Tin nhắn mới</div>
+                <h2 class="fw-bold mb-2">{{ $stats['unread_contacts'] }}</h2>
+                <div class="d-flex align-items-center">
+                    <span
+                        class="badge bg-danger bg-opacity-10 text-danger small border-0 me-2">{{ $stats['total_contacts'] }}</span>
+                    <span class="text-muted small">Tổng số tin nhắn</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Teachers Stats -->
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="text-muted small mb-1">Tổng số giáo viên</div>
-                    <h3 class="mb-0">{{ $stats['total_teachers'] }}</h3>
-                    <small class="text-success">
-                        <i class="fas fa-check-circle"></i> {{ $stats['active_teachers'] }} đang hoạt động
-                    </small>
+    <div class="row g-4">
+        <!-- Recent Enrollments -->
+        <div class="col-lg-8 animate-up" style="animation-delay: 0.5s">
+            <div class="card border-0 shadow-sm h-100">
+                <div
+                    class="card-header bg-white border-bottom border-light py-3 d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 fw-bold"><i class="fas fa-id-card me-2 text-primary"></i>Yêu cầu tư vấn mới nhất</h6>
+                    <a href="{{ route('admin.enrollments.index') }}"
+                        class="btn btn-sm btn-light text-primary fw-semibold rounded-pill px-3">Xem tất cả</a>
                 </div>
-                <div class="stat-icon bg-success bg-opacity-10 text-success">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enrollments Stats -->
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="text-muted small mb-1">Tuyển sinh</div>
-                    <h3 class="mb-0">{{ $stats['total_enrollments'] }}</h3>
-                    <small class="text-warning">
-                        <i class="fas fa-clock"></i> {{ $stats['pending_enrollments'] }} đang chờ
-                    </small>
-                </div>
-                <div class="stat-icon bg-warning bg-opacity-10 text-warning">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contacts Stats -->
-    <div class="col-md-6 col-lg-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="text-muted small mb-1">Liên hệ</div>
-                    <h3 class="mb-0">{{ $stats['total_contacts'] }}</h3>
-                    <small class="text-danger">
-                        <i class="fas fa-envelope"></i> {{ $stats['unread_contacts'] }} chưa đọc
-                    </small>
-                </div>
-                <div class="stat-icon bg-danger bg-opacity-10 text-danger">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Recent Items -->
-<div class="row g-4">
-    <!-- Recent Posts -->
-    <div class="col-lg-6">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-newspaper me-2 text-primary"></i>Bài viết gần đây</h6>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0 table-responsive-stack">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Tiêu đề</th>
-                                <th>Trạng thái</th>
-                                <th>Ngày</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($recentPosts as $post)
-                            <tr>
-                                <td data-label="Tiêu đề">
-                                    <a href="{{ route('admin.posts.edit', $post) }}" class="text-decoration-none">
-                                        {{ Str::limit($post->title, 40) }}
-                                    </a>
-                                </td>
-                                <td data-label="Trạng thái">
-                                    <span class="badge {{ $post->status == 'published' ? 'bg-success' : 'bg-warning' }}">
-                                        {{ $post->status }}
-                                    </span>
-                                </td>
-                                <td data-label="Ngày"><small>{{ $post->created_at->diffForHumans() }}</small></td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center py-4 text-muted">
-                                    <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                                    Chưa có bài viết nào
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @if($recentPosts->count() > 0)
-            <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.posts.index') }}" class="text-decoration-none">Xem tất cả bài viết <i class="fas fa-arrow-right ms-1"></i></a>
-            </div>
-            @endif
-        </div>
-    </div>
-
-    <!-- Recent Enrollments -->
-    <div class="col-lg-6">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-user-plus me-2 text-warning"></i>Tuyển sinh gần đây</h6>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0 table-responsive-stack">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Tên trẻ</th>
-                                <th>Phụ huynh</th>
-                                <th>Trạng thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($recentEnrollments as $enrollment)
-                            <tr>
-                                <td data-label="Tên trẻ">
-                                    <a href="{{ route('admin.enrollments.show', $enrollment) }}" class="text-decoration-none">
-                                        {{ $enrollment->child_name }}
-                                    </a>
-                                </td>
-                                <td data-label="Phụ huynh"><small>{{ $enrollment->parent_name }}</small></td>
-                                <td data-label="Trạng thái">
-                                    <span class="badge 
-                                        @if($enrollment->status == 'approved') bg-success
-                                        @elseif($enrollment->status == 'pending') bg-warning
-                                        @elseif($enrollment->status == 'reviewing') bg-info
-                                        @else bg-danger
-                                        @endif">
-                                        {{ $enrollment->status }}
-                                    </span>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center py-4 text-muted">
-                                    <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                                    Chưa có đơn tuyển sinh nào
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @if($recentEnrollments->count() > 0)
-            <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.enrollments.index') }}" class="text-decoration-none">Xem tất cả đơn tuyển sinh <i class="fas fa-arrow-right ms-1"></i></a>
-            </div>
-            @endif
-        </div>
-    </div>
-</div>
-
-<div class="row g-4 mt-4">
-    <!-- Recent Contacts -->
-    <div class="col-lg-6">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h6 class="mb-0"><i class="fas fa-envelope me-2 text-danger"></i>Liên hệ gần đây</h6>
-            </div>
-            <div class="card-body p-0">
-                <div class="list-group list-group-flush">
-                    @forelse($recentContacts as $contact)
-                    <a href="{{ route('admin.contacts.show', $contact) }}" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">{{ $contact->name }}</h6>
-                            <small class="text-muted">{{ $contact->created_at->diffForHumans() }}</small>
-                        </div>
-                        <p class="mb-1"><strong>{{ $contact->subject }}</strong></p>
-                        <small class="text-muted">{{ Str::limit($contact->message, 60) }}</small>
-                        <span class="badge bg-{{ $contact->status == 'unread' ? 'danger' : 'success' }} ms-2">{{ $contact->status }}</span>
-                    </a>
-                    @empty
-                    <div class="list-group-item text-center py-4 text-muted">
-                        <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                        Chưa có liên hệ nào
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Tên Trẻ / Phụ Huynh</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Trạng thái</th>
+                                    <th class="text-end">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($recentEnrollments as $enrollment)
+                                    <tr>
+                                        <td>
+                                            <div class="fw-semibold">{{ $enrollment->child_name }}</div>
+                                            <div class="text-muted small">PH: {{ $enrollment->parent_name }}</div>
+                                        </td>
+                                        <td>{{ $enrollment->parent_phone }}</td>
+                                        <td>
+                                            @php
+                                                $statusClasses = [
+                                                    'pending' => 'bg-warning bg-opacity-10 text-warning border-0',
+                                                    'reviewing' => 'bg-info bg-opacity-10 text-info border-0',
+                                                    'approved' => 'bg-success bg-opacity-10 text-success border-0',
+                                                    'rejected' => 'bg-danger bg-opacity-10 text-danger border-0',
+                                                ];
+                                                $statusTexts = [
+                                                    'pending' => 'Chờ duyệt',
+                                                    'reviewing' => 'Đang xem xét',
+                                                    'approved' => 'Đã duyệt',
+                                                    'rejected' => 'Từ chối',
+                                                ];
+                                            @endphp
+                                            <span
+                                                class="badge {{ $statusClasses[$enrollment->status] ?? 'bg-secondary' }}">
+                                                {{ $statusTexts[$enrollment->status] ?? $enrollment->status }}
+                                            </span>
+                                        </td>
+                                        <td class="text-end">
+                                            <a href="{{ route('admin.enrollments.show', $enrollment) }}"
+                                                class="btn btn-icon btn-light btn-sm rounded-circle">
+                                                <i class="fas fa-eye text-primary"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center py-5 text-muted">
+                                            <div class="mb-2"><i class="fas fa-folder-open fa-3x opacity-20"></i></div>
+                                            Chưa có yêu cầu tư vấn nào
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
-                    @endforelse
                 </div>
             </div>
-            @if($recentContacts->count() > 0)
-            <div class="card-footer bg-white text-center">
-                <a href="{{ route('admin.contacts.index') }}" class="text-decoration-none">Xem tất cả liên hệ <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+
+        <!-- Recent Posts -->
+        <div class="col-lg-4 animate-up" style="animation-delay: 0.6s">
+            <div class="card border-0 shadow-sm h-100">
+                <div
+                    class="card-header bg-white border-bottom border-light py-3 d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 fw-bold"><i class="fas fa-newspaper me-2 text-success"></i>Tin tức vừa đăng</h6>
+                    <a href="{{ route('admin.posts.index') }}"
+                        class="btn btn-sm btn-light text-success fw-semibold rounded-pill px-3">Tất cả</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        @forelse($recentPosts as $post)
+                            <div class="list-group-item border-light py-3">
+                                <div class="d-flex w-100 justify-content-between mb-1">
+                                    <h6 class="mb-1 fw-semibold text-truncate" style="max-width: 200px;">
+                                        {{ $post->title }}</h6>
+                                    <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span
+                                        class="badge {{ $post->status == 'published' ? 'bg-success' : 'bg-warning' }} bg-opacity-10 text-{{ $post->status == 'published' ? 'success' : 'warning' }} border-0 px-2 py-1 small">
+                                        {{ $post->status == 'published' ? 'Công khai' : 'Bản nháp' }}
+                                    </span>
+                                    <a href="{{ route('admin.posts.edit', $post) }}"
+                                        class="text-primary small fw-semibold text-decoration-none">Chỉnh sửa</a>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="p-4 text-center text-muted">
+                                Chưa có bài viết nào.
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
             </div>
-            @endif
         </div>
     </div>
-</div>
 @endsection

@@ -30,7 +30,7 @@
                         <td><strong>{{ $category->name }}</strong></td>
                         <td><code>{{ $category->slug }}</code></td>
                         <td><span class="badge bg-info">{{ $category->posts_count }} bài viết</span></td>
-                        <td>{{ $category->created_at->format('M d, Y') }}</td>
+                        <td>{{ $category->created_at->format('d/m/Y') }}</td>
                         <td class="table-actions">
                             <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-sm btn-warning">
                                 <i class="fas fa-edit"></i>
