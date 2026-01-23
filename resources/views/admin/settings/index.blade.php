@@ -202,7 +202,7 @@
                                                 class="image-upload-wrapper p-3 rounded-4 border-2 border-dashed border-light text-center bg-light bg-opacity-50">
                                                 <div class="image-preview-wrapper mb-3">
                                                     @if (isset($settings['hero_image']))
-                                                        <img src="{{ asset('storage/' . $settings['hero_image']) }}"
+                                                        <img src="{{ Str::startsWith($settings['hero_image'], 'assets/') ? asset($settings['hero_image']) : asset('storage/' . $settings['hero_image']) }}"
                                                             class="img-fluid rounded-3 shadow-sm border border-white border-4 preview-image"
                                                             style="max-height: 200px;">
                                                     @else
@@ -334,7 +334,7 @@
                                                 <div class="mb-3 rounded-3 overflow-hidden bg-light text-center d-flex align-items-center justify-content-center image-preview-wrapper"
                                                     style="height: 120px;">
                                                     @if (isset($settings['gallery_image_' . $i]))
-                                                        <img src="{{ asset('storage/' . $settings['gallery_image_' . $i]) }}"
+                                                        <img src="{{ Str::startsWith($settings['gallery_image_' . $i], 'assets/') ? asset($settings['gallery_image_' . $i]) : asset('storage/' . $settings['gallery_image_' . $i]) }}"
                                                             class="img-fluid h-100 w-100 object-fit-cover shadow-sm border border-white border-2 preview-image">
                                                     @else
                                                         <i class="fas fa-image fa-3x text-muted opacity-25"></i>

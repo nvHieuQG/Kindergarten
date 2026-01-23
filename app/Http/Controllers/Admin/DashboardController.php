@@ -57,8 +57,8 @@ class DashboardController extends Controller
                 'trace' => $e->getTraceAsString(),
             ]);
 
-            return redirect()->route('admin.dashboard')
-                ->with('error', 'Đã xảy ra lỗi khi tải dashboard. Vui lòng thử lại sau.');
+            // Tránh redirect loop - hiển thị lỗi trực tiếp
+            abort(500, 'Đã xảy ra lỗi khi tải dashboard. Vui lòng thử lại sau.');
         }
     }
 }

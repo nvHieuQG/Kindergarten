@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'address',
@@ -16,6 +19,12 @@ class Branch extends Model
         'status',
     ];
 
+    protected $casts = [
+        'status' => 'boolean',
+        'order' => 'integer',
+    ];
+
+    // Scopes
     public function scopeActive($query)
     {
         return $query->where('status', true);

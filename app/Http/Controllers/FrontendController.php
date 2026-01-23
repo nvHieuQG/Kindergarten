@@ -121,6 +121,4 @@ class FrontendController extends Controller
                 ->with('error', 'Đã xảy ra lỗi khi gửi đơn đăng ký. Vui lòng thử lại sau.');
         }
     }
-
-
 }

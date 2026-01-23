@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Honeypot;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest
@@ -27,6 +28,8 @@ class ContactRequest extends FormRequest
             'phone' => ['required', 'string', 'regex:/^(0)[0-9]{9}$/'],
             'message' => 'required|string',
             'subject' => 'nullable|string|max:255',
+            // Honeypot field để chống bot spam
+            'website' => ['nullable', new Honeypot],
         ];
     }
 

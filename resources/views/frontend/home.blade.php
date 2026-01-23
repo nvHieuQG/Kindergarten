@@ -52,6 +52,10 @@
 
                         <form action="{{ route('enrollment.store') }}" method="POST">
                             @csrf
+                            {{-- Honeypot field - ẩn với người dùng, bot sẽ điền vào --}}
+                            <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                                <input type="text" name="company" tabindex="-1" autocomplete="off">
+                            </div>
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -482,6 +486,10 @@
                         </div>
                         <form action="{{ route('contact.store') }}" method="POST">
                             @csrf
+                            {{-- Honeypot field - ẩn với người dùng, bot sẽ điền vào --}}
+                            <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                                <input type="text" name="website" tabindex="-1" autocomplete="off">
+                            </div>
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="small fw-bold text-dark mb-1">Họ tên *</label>

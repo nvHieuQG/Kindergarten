@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Enrollment extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'parent_name',
         'parent_email',
@@ -28,6 +30,12 @@ class Enrollment extends Model
         'documents' => 'array',
     ];
 
+    // Accessors
+    public function getChildDobYearAttribute()
+    {
+        return $this->child_dob ? $this->child_dob->format('Y') : null;
+    }
+
     // Scopes
     public function scopePending($query)
     {
@@ -42,5 +50,10 @@ class Enrollment extends Model
     public function scopeApproved($query)
     {
         return $query->where('status', 'approved');
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('status', 'rejected');
     }
 }

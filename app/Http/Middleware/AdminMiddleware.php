@@ -16,11 +16,11 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth()->check()) {
-            return redirect()->route('login')->with('error', 'Please login to access admin panel.');
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để truy cập trang quản trị.');
         }
 
         if (!auth()->user()->isAdmin()) {
-            abort(403, 'Unauthorized access. Admin privileges required.');
+            abort(403, 'Truy cập bị từ chối. Bạn cần quyền quản trị viên.');
         }
 
         return $next($request);

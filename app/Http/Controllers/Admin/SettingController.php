@@ -77,7 +77,6 @@ class SettingController extends Controller
             'zalo_number',
             'facebook_page_id',
             'google_maps',
-            'google_maps',
             'stats_exp',
             'stats_teachers',
             'stats_students',

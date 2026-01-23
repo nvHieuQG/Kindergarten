@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Honeypot;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EnrollmentRequest extends FormRequest
@@ -34,6 +35,8 @@ class EnrollmentRequest extends FormRequest
             'program' => 'nullable|string|max:255',
             'preferred_start_date' => 'nullable|date|after_or_equal:today',
             'message' => 'nullable|string|max:1000',
+            // Honeypot field để chống bot spam
+            'company' => ['nullable', new Honeypot],
         ];
     }
 

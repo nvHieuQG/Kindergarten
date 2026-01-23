@@ -9,8 +9,9 @@
             <div
                 class="p-4 rounded-4 bg-white border border-primary border-opacity-10 shadow-sm d-flex align-items-center justify-content-between">
                 <div>
-                    <h3 class="fw-bold mb-1">Chào mừng trở lại, {{ auth()->user()->name }}! 👋</h3>
-                    <p class="text-muted mb-0">Hôm nay là {{ now()->translatedFormat('l, d/m/Y') }}. Đây là tóm tắt tình hình
+                    <h3 class="fw-bold mb-1 fs-4 fs-md-3">Chào mừng trở lại, {{ auth()->user()->name }}! 👋</h3>
+                    <p class="text-muted mb-0 small">Hôm nay là {{ now()->translatedFormat('l, d/m/Y') }}. Đây là tóm tắt
+                        tình hình
                         nhà trường.</p>
                 </div>
                 <div class="d-none d-md-block">
@@ -101,7 +102,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
+                        <table class="table table-hover align-middle mb-0 table-responsive-stack">
                             <thead>
                                 <tr>
                                     <th>Tên Trẻ / Phụ Huynh</th>
@@ -113,12 +114,12 @@
                             <tbody>
                                 @forelse($recentEnrollments as $enrollment)
                                     <tr>
-                                        <td>
+                                        <td data-label="Tên Trẻ / Phụ Huynh">
                                             <div class="fw-semibold">{{ $enrollment->child_name }}</div>
                                             <div class="text-muted small">PH: {{ $enrollment->parent_name }}</div>
                                         </td>
-                                        <td>{{ $enrollment->parent_phone }}</td>
-                                        <td>
+                                        <td data-label="Số điện thoại">{{ $enrollment->parent_phone }}</td>
+                                        <td data-label="Trạng thái">
                                             @php
                                                 $statusClasses = [
                                                     'pending' => 'bg-warning bg-opacity-10 text-warning border-0',
@@ -138,7 +139,7 @@
                                                 {{ $statusTexts[$enrollment->status] ?? $enrollment->status }}
                                             </span>
                                         </td>
-                                        <td class="text-end">
+                                        <td data-label="Hành động" class="text-end">
                                             <a href="{{ route('admin.enrollments.show', $enrollment) }}"
                                                 class="btn btn-icon btn-light btn-sm rounded-circle">
                                                 <i class="fas fa-eye text-primary"></i>
