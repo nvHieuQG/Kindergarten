@@ -131,8 +131,22 @@
     <!-- Hero End -->
 
     <!-- Stats Counter Start -->
-    <div class="container-fluid py-4"
-        style="background: linear-gradient(135deg, #FFB300 0%, #FFC107 100%); margin-top: -40px; position: relative; z-index: 10;">
+    <div class="container-fluid py-4 stats-section"
+        style="background: linear-gradient(135deg, #FFB300 0%, #FFC107 100%); position: relative; z-index: 10;">
+        <style>
+            @media (min-width: 992px) {
+                .stats-section {
+                    margin-top: -40px;
+                }
+            }
+
+            @media (max-width: 991px) {
+                .stats-section {
+                    margin-top: 0;
+                    padding: 3rem 0;
+                }
+            }
+        </style>
         <div class="container">
             <div class="row g-3">
                 <div class="col-lg-3 col-md-6">
@@ -143,7 +157,7 @@
                         </div>
                         <h2 class="display-4 fw-bold mb-2 counter" data-target="{{ $settings['stats_exp'] ?? 10 }}">0
                         </h2>
-                        <p class="fs-5 mb-0 fw-semibold">Năm kinh nghiệm</p>
+                        <p class="fs-5 mb-0 fw-semibold">Kinh nghiệm</p>
                     </div>
                 </div>
 
@@ -188,8 +202,8 @@
     <!-- Stats Counter End -->
 
     <!-- About Start -->
-    <div id="about" class="container-fluid py-5 about bg-light">
-        <div class="container py-5">
+    <div id="about" class="container-fluid py-5 about bg-light section-padding-mobile">
+        <div class="container py-lg-5">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-5">
                     <div class="video border">
@@ -253,8 +267,8 @@
     <!-- About End -->
 
     <!-- Blog Start -->
-    <div id="blog" class="container-fluid py-5">
-        <div class="container py-4">
+    <div id="blog" class="container-fluid py-5 section-padding-mobile">
+        <div class="container py-lg-4">
             <div class="mx-auto text-center mb-5" style="max-width: 700px;">
                 <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">
                     Tin tức & Sự kiện</h4>
@@ -306,8 +320,8 @@
     </div>
     <!-- Blog End -->
 
-    <div id="services" class="container-fluid service py-5">
-        <div class="container py-4">
+    <div id="services" class="container-fluid service py-5 section-padding-mobile">
+        <div class="container py-lg-4">
             <div class="section-title-wrapper text-center">
                 <span class="title-badge mb-3">Dịch vụ ưu việt</span>
                 <h2 class="display-5 text-secondary">Giáo dục toàn diện cho bé</h2>
@@ -352,8 +366,8 @@
 
 
     <!-- Team Start-->
-    <div id="team" class="container-fluid team py-5">
-        <div class="container py-4">
+    <div id="team" class="container-fluid team py-5 section-padding-mobile">
+        <div class="container py-lg-4">
             <div class="mx-auto text-center mb-5" style="max-width: 700px;">
                 <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">
                     Đội ngũ của chúng tôi</h4>
@@ -406,8 +420,8 @@
 
 
     <!-- FAQ & Contact Start -->
-    <div id="contact" class="container-fluid py-3 bg-light">
-        <div class="container py-3">
+    <div id="contact" class="container-fluid py-5 bg-light section-padding-mobile">
+        <div class="container py-lg-3">
             <div class="row g-5">
                 <!-- Left: FAQ & Quick Info -->
                 <div class="col-lg-6">
@@ -522,159 +536,191 @@
 
     @push('scripts')
         <script>
-            // Smooth scroll for anchor links
             document.addEventListener('DOMContentLoaded', function() {
-                const scrollLinks = document.querySelectorAll('.scroll-link');
+                // Video Modal Logic
+                const videoModal = document.getElementById('videoModal');
+                const videoIframe = document.getElementById('video');
+                const playButtons = document.querySelectorAll('.btn-play');
 
-                scrollLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        const href = this.getAttribute('href');
+                // Hàm chuyển đổi link Youtube sang link Embed
+                function getEmbedUrl(url) {
+                    if (!url) return '';
+                    let videoId = '';
 
-                        if (href && href.startsWith('#')) {
-                            e.preventDefault();
+                    if (url.includes('youtube.com/watch?v=')) {
+                        videoId = url.split('v=')[1].split('&')[0];
+                    } else if (url.includes('youtu.be/')) {
+                        videoId = url.split('youtu.be/')[1].split('?')[0];
+                    } else if (url.includes('youtube.com/embed/')) {
+                        return url; // Đã đúng định dạng
+                    }
 
-                            const targetId = href.substring(1);
-                            const targetElement = document.getElementById(targetId);
-
-                            if (targetElement) {
-                                const navbarHeight = document.querySelector('.navbar').offsetHeight ||
-                                    100;
-                                const targetPosition = targetElement.offsetTop - navbarHeight;
-
-                                window.scrollTo({
-                                    top: targetPosition,
-                                    behavior: 'smooth'
-                                });
-
-                                const navbarCollapse = document.getElementById('navbarCollapse');
-                                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                                    navbarCollapse.classList.remove('show');
-                                }
-                            }
-                        }
-                    });
-                });
-
-                if (window.location.hash) {
-                    setTimeout(() => {
-                        const targetElement = document.querySelector(window.location.hash);
-                        if (targetElement) {
-                            const navbarHeight = document.querySelector('.navbar').offsetHeight || 100;
-                            const targetPosition = targetElement.offsetTop - navbarHeight;
-                            window.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }, 100);
+                    return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0` : url;
                 }
-            });
-        </script>
-    @endpush
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const form = document.querySelector('form[action="{{ route('enrollment.store') }}"]');
-                if (!form) return;
 
-                const inputs = {
-                    parentName: document.getElementById('floatingParentName'),
-                    phone: document.getElementById('floatingPhone'),
-                    childName: document.getElementById('floatingChildName'),
-                    dobYear: document.getElementById('floatingDobYear')
-                };
+                playButtons.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const rawUrl = this.getAttribute('data-src');
+                        videoIframe.setAttribute('src', getEmbedUrl(rawUrl));
 
-                const currentYear = new Date().getFullYear();
-
-                // Validation Rules
-                const validators = {
-                    parentName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên phụ huynh.',
-                    childName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên bé.',
-                    phone: (value) => {
-                        if (!value) return 'Vui lòng nhập số điện thoại.';
-                        const regex = /^(0)[0-9]{9}$/;
-                        return regex.test(value) ? null : 'Số điện thoại phải có 10 số và bắt đầu bằng số 0.';
-                    },
-                    dobYear: (value) => {
-                        if (!value) return 'Vui lòng nhập năm sinh.';
-                        const year = parseInt(value);
-                        if (isNaN(year) || year < 2018 || year > currentYear) {
-                            return `Năm sinh phải từ 2018 đến ${currentYear}.`;
-                        }
-                        return null;
-                    }
-                };
-
-                // UI Helpers
-                const showError = (input, message) => {
-                    input.classList.add('is-invalid');
-                    input.classList.remove('is-valid');
-
-                    // Find or create invalid-feedback div
-                    let feedback = input.parentNode.querySelector('.invalid-feedback');
-                    if (!feedback) {
-                        feedback = document.createElement('div');
-                        feedback.className = 'invalid-feedback';
-                        input.parentNode.appendChild(feedback);
-                    }
-                    feedback.innerHTML = `<i class="fas fa-exclamation-circle me-1 small"></i>${message}`;
-                };
-
-                const showSuccess = (input) => {
-                    input.classList.remove('is-invalid');
-                    // We don't necessarily need a green border for every valid field while typing
-                    // but we can add it if you want. Let's keep it clean.
-                    input.classList.remove('is-valid');
-
-                    const feedback = input.parentNode.querySelector('.invalid-feedback');
-                    if (feedback) {
-                        feedback.textContent = '';
-                    }
-                };
-
-                const validateInput = (key) => {
-                    const input = inputs[key];
-                    if (!input) return true; // Skip if input not found
-
-                    const error = validators[key](input.value);
-                    if (error) {
-                        showError(input, error);
-                        return false;
-                    } else {
-                        showSuccess(input);
-                        return true;
-                    }
-                };
-
-                // Attach Events
-                Object.keys(inputs).forEach(key => {
-                    const input = inputs[key];
-                    if (input) {
-                        // Validate on blur
-                        input.addEventListener('blur', () => validateInput(key));
-                        // Clear error on input
-                        input.addEventListener('input', () => {
-                            if (input.classList.contains('is-invalid')) {
-                                validateInput(key);
-                            }
-                        });
-                    }
-                });
-
-                // Form Submit
-                form.addEventListener('submit', function(e) {
-                    let isValid = true;
-                    Object.keys(inputs).forEach(key => {
-                        if (!validateInput(key)) {
-                            isValid = false;
-                        }
+                        // Fix aria-hidden error: Loại bỏ khi hiển thị
+                        videoModal.removeAttribute('aria-hidden');
                     });
-
-                    if (!isValid) {
-                        e.preventDefault();
-                    }
                 });
+
+                // Clear video when modal closed
+                videoModal.addEventListener('hide.bs.modal', function() {
+                    videoIframe.setAttribute('src', '');
+                    // Khôi phục aria-hidden nếu cần khi đóng (Bootstrap tự quản lý thường tốt hơn)
+                });
+
+                // Smooth scroll for anchor links
+                const scrollLinks = document.querySelectorAll('.scroll-link');
+                // ... (phần code smooth scroll giữ nguyên bên dưới)
             });
         </script>
-    @endpush
-@endsection
+        scrollLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+
+        if (href && href.startsWith('#')) {
+        e.preventDefault();
+
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+        const navbarHeight = document.querySelector('.navbar').offsetHeight ||
+        100;
+        const targetPosition = targetElement.offsetTop - navbarHeight;
+
+        window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+        });
+
+        const navbarCollapse = document.getElementById('navbarCollapse');
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        navbarCollapse.classList.remove('show');
+        }
+        }
+        }
+        });
+        });
+
+        if (window.location.hash) {
+        setTimeout(() => {
+        const targetElement = document.querySelector(window.location.hash);
+        if (targetElement) {
+        const navbarHeight = document.querySelector('.navbar').offsetHeight || 100;
+        const targetPosition = targetElement.offsetTop - navbarHeight;
+        window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+        });
+        }
+        }, 100);
+        }
+
+        // Enrollment Form Validation
+        const form = document.querySelector('form[action="{{ route('enrollment.store') }}"]');
+        if (form) {
+        const inputs = {
+        parentName: document.getElementById('floatingParentName'),
+        phone: document.getElementById('floatingPhone'),
+        childName: document.getElementById('floatingChildName'),
+        dobYear: document.getElementById('floatingDobYear')
+        };
+
+        const currentYear = new Date().getFullYear();
+
+        // Validation Rules
+        const validators = {
+        parentName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên phụ huynh.',
+        childName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên bé.',
+        phone: (value) => {
+        if (!value) return 'Vui lòng nhập số điện thoại.';
+        const regex = /^(0)[0-9]{9}$/;
+        return regex.test(value) ? null :
+        'Số điện thoại phải có 10 số và bắt đầu bằng số 0.';
+        },
+        dobYear: (value) => {
+        if (!value) return 'Vui lòng nhập năm sinh.';
+        const year = parseInt(value);
+        if (isNaN(year) || year < 2018 || year> currentYear) {
+            return `Năm sinh phải từ 2018 đến ${currentYear}.`;
+            }
+            return null;
+            }
+            };
+
+            // UI Helpers
+            const showError = (input, message) => {
+            input.classList.add('is-invalid');
+            input.classList.remove('is-valid');
+
+            // Find or create invalid-feedback div
+            let feedback = input.parentNode.querySelector('.invalid-feedback');
+            if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.className = 'invalid-feedback';
+            input.parentNode.appendChild(feedback);
+            }
+            feedback.innerHTML = `<i class="fas fa-exclamation-circle me-1 small"></i>${message}`;
+            };
+
+            const showSuccess = (input) => {
+            input.classList.remove('is-invalid');
+            input.classList.remove('is-valid');
+
+            const feedback = input.parentNode.querySelector('.invalid-feedback');
+            if (feedback) {
+            feedback.textContent = '';
+            }
+            };
+
+            const validateInput = (key) => {
+            const input = inputs[key];
+            if (!input) return true;
+
+            const error = validators[key](input.value);
+            if (error) {
+            showError(input, error);
+            return false;
+            } else {
+            showSuccess(input);
+            return true;
+            }
+            };
+
+            // Attach Events
+            Object.keys(inputs).forEach(key => {
+            const input = inputs[key];
+            if (input) {
+            input.addEventListener('blur', () => validateInput(key));
+            input.addEventListener('input', () => {
+            if (input.classList.contains('is-invalid')) {
+            validateInput(key);
+            }
+            });
+            }
+            });
+
+            // Form Submit
+            form.addEventListener('submit', function(e) {
+            let isValid = true;
+            Object.keys(inputs).forEach(key => {
+            if (!validateInput(key)) {
+            isValid = false;
+            }
+            });
+
+            if (!isValid) {
+            e.preventDefault();
+            }
+            });
+            }
+            });
+            </script>
+        @endpush
+    @endsection

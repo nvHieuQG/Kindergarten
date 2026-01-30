@@ -399,41 +399,55 @@
             font-weight: 500;
         }
 
-        /* Responsive Typography */
+        /* Responsive Typography Utilities */
         @media (max-width: 768px) {
             body {
                 font-size: 15px;
             }
 
-            h1,
-            .h1 {
-                font-size: 2rem;
+            .display-1 {
+                font-size: 2.25rem !important;
+                letter-spacing: -1px !important;
             }
 
-            h2,
-            .h2 {
-                font-size: 1.75rem;
+            .display-4 {
+                font-size: 2rem !important;
             }
 
-            h3,
-            .h3 {
-                font-size: 1.5rem;
+            .display-5 {
+                font-size: 1.75rem !important;
             }
 
-            h4,
-            .h4 {
-                font-size: 1.25rem;
+            .section-padding-mobile {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .display-1 {
+                font-size: 1.85rem !important;
+                letter-spacing: -0.5px !important;
             }
 
-            h5,
-            .h5 {
-                font-size: 1.1rem;
+            .navbar-brand h1 {
+                font-size: 1rem !important;
             }
 
-            h6,
-            .h6 {
-                font-size: 1rem;
+            .btn {
+                padding: 10px 20px !important;
+                font-size: 14px !important;
             }
+
+            .container-fluid {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+        }
+
+        /* Improved Card Responsiveness */
+        .card-responsive {
+            margin-bottom: 20px;
         }
 
         /* ========================================
@@ -521,13 +535,15 @@
             color: var(--bs-primary);
         }
 
-        /* Logo Animation */
-        .logo-icon {
-            transition: transform 0.3s ease;
+        /* Logo Animation - Rotate 360 on Hover */
+        .logo-icon,
+        .navbar-brand img {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .navbar-brand:hover .logo-icon {
-            transform: rotate(180deg);
+        .navbar-brand:hover .logo-icon,
+        .navbar-brand:hover img {
+            transform: rotate(360deg);
         }
 
         /* Mobile navbar optimization */
@@ -664,6 +680,59 @@
                 display: none;
                 /* Hide tooltips on mobile */
             }
+        }
+
+        /* Footer Premium Refinement */
+        .footer {
+            color: #475569;
+        }
+
+        .footer h4,
+        .footer h5 {
+            color: #1e293b !important;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .footer-item p {
+            line-height: 1.8;
+            color: #64748b;
+        }
+
+        .footer-galary-img {
+            transition: all 0.3s ease;
+            position: relative;
+            background: #fff;
+        }
+
+        .footer-galary-img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Override the ugly dotted border from style.css */
+        .footer .footer-galary-img img {
+            border-style: none !important;
+            border-width: 0 !important;
+            border-radius: 12px;
+            transition: all 0.5s ease;
+        }
+
+        .footer .footer-galary-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .transition-hover:hover {
+            color: var(--bs-primary) !important;
+            transform: translateX(5px);
+            padding-left: 2px;
+        }
+
+        .fw-extrabold {
+            font-weight: 800 !important;
+        }
+
+        .letter-spacing-1 {
+            letter-spacing: 1px;
         }
     </style>
 

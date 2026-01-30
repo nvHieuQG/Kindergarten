@@ -25,13 +25,7 @@
                     <!-- Modern Horizontal Tabs -->
                     <ul class="nav nav-tabs custom-modern-tabs px-4 border-0 bg-white" id="settingTabs" role="tablist">
                         <li class="nav-item">
-                            <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general"
-                                type="button" role="tab">
-                                <i class="fas fa-id-card me-2"></i>Chung & Liên hệ
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link" id="hero-tab" data-bs-toggle="tab" data-bs-target="#hero"
+                            <button class="nav-link active" id="hero-tab" data-bs-toggle="tab" data-bs-target="#hero"
                                 type="button" role="tab">
                                 <i class="fas fa-tv me-2"></i>Trang Chủ (Hero)
                             </button>
@@ -48,6 +42,12 @@
                                 <i class="fas fa-images me-2"></i>Thống kê & Thư viện
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="general-tab" data-bs-toggle="tab" data-bs-target="#general"
+                                type="button" role="tab">
+                                <i class="fas fa-id-card me-2"></i>Chung & Liên hệ
+                            </button>
+                        </li>
                     </ul>
                 </div>
 
@@ -55,9 +55,22 @@
                     <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
+                        @if ($errors->any())
+                            <div
+                                class="alert alert-danger mx-4 mt-4 mb-0 rounded-3 border-0 border-start border-4 border-danger shadow-sm">
+                                <h6 class="fw-bold mb-1"><i class="fas fa-exclamation-triangle me-2"></i>Vui lòng kiểm tra
+                                    lại:</h6>
+                                <ul class="mb-0 small">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="tab-content" id="settingTabsContent">
                             <!-- Tab 1: General & Contact -->
-                            <div class="tab-pane fade show active p-4 p-md-5" id="general" role="tabpanel">
+                            <div class="tab-pane fade p-4 p-md-5" id="general" role="tabpanel">
                                 <div class="row g-4">
                                     <div class="col-lg-7">
                                         <div class="settings-block bg-white p-4 rounded-4 shadow-sm h-100">
@@ -66,19 +79,60 @@
                                                         class="fas fa-globe text-primary small"></i></span>
                                                 Thông tin cơ bản
                                             </h6>
-                                            <div class="mb-4">
-                                                <label
-                                                    class="form-label small fw-bold text-secondary text-uppercase letter-spacing-1">Tên
-                                                    Trường / Website</label>
-                                                <input type="text" class="form-control premium-input shadow-none"
-                                                    name="site_name"
-                                                    value="{{ old('site_name', $settings['site_name'] ?? '') }}" required>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="mb-4">
+                                                        <label
+                                                            class="form-label small fw-bold text-secondary text-uppercase letter-spacing-1">Logo
+                                                            Website</label>
+                                                        <div
+                                                            class="image-upload-wrapper p-3 rounded-4 border border-light text-center bg-light bg-opacity-50">
+                                                            <div class="image-preview-wrapper mb-3"
+                                                                style="min-height: 80px; display: flex; align-items: center; justify-content: center;">
+                                                                @if (isset($settings['site_logo']))
+                                                                    <img src="{{ asset('storage/' . $settings['site_logo']) }}"
+                                                                        class="img-fluid rounded-3 preview-image"
+                                                                        style="max-height: 80px;">
+                                                                @else
+                                                                    <div class="logo-icon bg-primary rounded-circle d-flex align-items-center justify-content-center"
+                                                                        style="width: 60px; height: 60px;">
+                                                                        <i class="fas fa-sun text-white fa-lg"></i>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                            <input type="file"
+                                                                class="form-control premium-input bg-white shadow-none preview-input"
+                                                                name="site_logo" accept="image/*">
+                                                            <p class="text-muted extra-small mt-2 mb-0">Hỗ trợ JPG, PNG, SVG
+                                                                (Vuông hoặc 1:1)</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-4">
+                                                        <label
+                                                            class="form-label small fw-bold text-secondary text-uppercase letter-spacing-1">Tên
+                                                            Trường / Website</label>
+                                                        <input type="text"
+                                                            class="form-control premium-input shadow-none mb-3"
+                                                            name="site_name"
+                                                            value="{{ old('site_name', $settings['site_name'] ?? '') }}">
+
+                                                        <label
+                                                            class="form-label small fw-bold text-secondary text-uppercase letter-spacing-1">Slogan
+                                                            / Mô tả ngắn</label>
+                                                        <input type="text" class="form-control premium-input shadow-none"
+                                                            name="site_slogan"
+                                                            value="{{ old('site_slogan', $settings['site_slogan'] ?? '') }}"
+                                                            placeholder="Vd: Trường Mầm Non">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-0">
                                                 <label
                                                     class="form-label small fw-bold text-secondary text-uppercase letter-spacing-1">Google
                                                     Maps Iframe</label>
-                                                <textarea class="form-control premium-input shadow-none font-monospace" name="google_maps" rows="5"
+                                                <textarea class="form-control premium-input shadow-none font-monospace" name="google_maps" rows="4"
                                                     style="font-size: 0.8rem;">{{ old('google_maps', $settings['google_maps'] ?? '') }}</textarea>
                                             </div>
                                         </div>
@@ -167,7 +221,7 @@
                             </div>
 
                             <!-- Tab 2: Hero Section -->
-                            <div class="tab-pane fade p-4 p-md-5" id="hero" role="tabpanel">
+                            <div class="tab-pane fade show active p-4 p-md-5" id="hero" role="tabpanel">
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div
@@ -234,12 +288,12 @@
                                             thiệu)</label>
                                         <input type="text" class="form-control premium-input shadow-none"
                                             name="about_title"
-                                            value="{{ old('about_title', $settings['about_title'] ?? '') }}" required>
+                                            value="{{ old('about_title', $settings['about_title'] ?? '') }}">
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label small fw-bold text-secondary text-uppercase">Nội dung văn
                                             bản</label>
-                                        <textarea class="form-control premium-input shadow-none" name="about_content" rows="10" required>{{ old('about_content', $settings['about_content'] ?? '') }}</textarea>
+                                        <textarea class="form-control premium-input shadow-none" name="about_content" rows="10">{{ old('about_content', $settings['about_content'] ?? '') }}</textarea>
                                     </div>
                                     <div class="mb-0">
                                         <label class="form-label small fw-bold text-secondary text-uppercase"><i
@@ -456,6 +510,32 @@
         }
     </style>
     <script>
+        // --- Tab Persistence Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy ID tab đã lưu từ sessionStorage
+            const activeTabId = sessionStorage.getItem('activeSettingTab');
+
+            if (activeTabId) {
+                // Tìm button tab tương ứng
+                const tabTriggerEl = document.querySelector(`#${activeTabId}`);
+                if (tabTriggerEl) {
+                    // Sử dụng Bootstrap Tab API để kích hoạt
+                    const tab = new bootstrap.Tab(tabTriggerEl);
+                    tab.show();
+                }
+            }
+
+            // Lắng nghe sự kiện chuyển tab để lưu lại
+            const tabEls = document.querySelectorAll('button[data-bs-toggle="tab"]');
+            tabEls.forEach(el => {
+                el.addEventListener('shown.bs.tab', function(event) {
+                    // Lưu ID của tab vừa mới hiển thị
+                    sessionStorage.setItem('activeSettingTab', event.target.id);
+                });
+            });
+        });
+
+        // --- Image Preview Logic (Existing) ---
         document.querySelectorAll('.preview-input').forEach(input => {
             input.addEventListener('change', function() {
                 const file = this.files[0];

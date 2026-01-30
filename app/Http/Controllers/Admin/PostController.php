@@ -6,21 +6,41 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['user', 'category'])
-            ->latest()
-            ->paginate(15);
+        $query = Post::with(['user', 'category']);
 
-        return view('admin.posts.index', compact('posts'));
+        // Search by title
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where('title', 'like', "%{$search}%");
+        }
+
+        // Filter by category
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $posts = $query->latest()->paginate(10)->withQueryString();
+        $categories = Category::all();
+
+        return view('admin.posts.index', compact('posts', 'categories'));
     }
 
     /**
@@ -35,19 +55,11 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'excerpt' => 'nullable|max:500',
-            'content' => 'required',
-            'featured_image' => 'nullable|image|max:2048',
-            'status' => 'required|in:draft,published',
-            'published_at' => 'nullable|date',
-        ]);
+        $validated = $request->validated();
 
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
         $validated['slug'] = Str::slug($validated['title']);
 
         // Handle image upload
@@ -87,17 +99,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'excerpt' => 'nullable|max:500',
-            'content' => 'required',
-            'featured_image' => 'nullable|image|max:2048',
-            'status' => 'required|in:draft,published',
-            'published_at' => 'nullable|date',
-        ]);
+        $validated = $request->validated();
 
         $validated['slug'] = Str::slug($validated['title']);
 

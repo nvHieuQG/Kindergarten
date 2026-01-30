@@ -7,7 +7,6 @@ use App\Models\Post;
 use App\Models\Teacher;
 use App\Models\Enrollment;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 

@@ -18,15 +18,17 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'site_name' => 'required|string|max:255',
-            'about_title' => 'required|string|max:255',
-            'about_content' => 'required|string',
+            'site_name' => 'nullable|string|max:255',
+            'site_slogan' => 'nullable|string|max:255',
+            'about_title' => 'nullable|string|max:255',
+            'about_content' => 'nullable|string',
             'about_video' => 'nullable|url|max:255',
 
-            'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'hero_title' => 'required|string|max:255',
-            'hero_subtitle' => 'required|string',
-            'hero_form_title' => 'required|string|max:255',
+            'site_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'hero_title' => 'nullable|string|max:255',
+            'hero_subtitle' => 'nullable|string',
+            'hero_form_title' => 'nullable|string|max:255',
             'about_feature_1' => 'nullable|string|max:255',
             'about_feature_2' => 'nullable|string|max:255',
             'about_feature_3' => 'nullable|string|max:255',
@@ -45,23 +47,27 @@ class SettingController extends Controller
             'facebook_page_id' => 'nullable|string|max:255',
             'google_maps' => 'nullable|string',
 
-
-
-
             'stats_exp' => 'nullable|integer|min:0',
             'stats_teachers' => 'nullable|integer|min:0',
             'stats_students' => 'nullable|integer|min:0',
             'stats_satisfaction' => 'nullable|integer|min:0|max:100',
-            'gallery_image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'gallery_image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'gallery_image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'gallery_image_4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'gallery_image_5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'gallery_image_6' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'gallery_image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'gallery_image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'gallery_image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'gallery_image_4' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'gallery_image_5' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'gallery_image_6' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+        ], [
+            'image' => 'Trường này phải là định dạng ảnh.',
+            'url' => 'Trường này phải là một đường dẫn URL hợp lệ.',
+            'integer' => 'Trường này phải là số nguyên.',
+            'min' => 'Giá trị tối thiểu không hợp lệ.',
+            'max' => 'Vượt quá giới hạn cho phép.'
         ]);
 
         $keys = [
             'site_name',
+            'site_slogan',
             'about_title',
             'about_content',
             'about_video',
@@ -93,18 +99,31 @@ class SettingController extends Controller
             if ($request->has($key)) {
                 Setting::updateOrCreate(
                     ['key' => $key],
-                    ['value' => $request->input($key), 'type' => 'text'] // Default type text for simplicity
+                    ['value' => $request->input($key), 'type' => 'text']
                 );
             }
         }
 
-        // Specific handling for textareas if needed, but loop covers basic text
+        // Specific handling for textareas if needed
         Setting::updateOrCreate(
             ['key' => 'about_content'],
             ['value' => $request->about_content, 'type' => 'textarea']
         );
 
+        // Update Site Logo
+        if ($request->hasFile('site_logo')) {
+            $oldLogo = Setting::where('key', 'site_logo')->value('value');
+            if ($oldLogo && Storage::disk('public')->exists($oldLogo)) {
+                Storage::disk('public')->delete($oldLogo);
+            }
 
+            $logoPath = $request->file('site_logo')->store('settings', 'public');
+
+            Setting::updateOrCreate(
+                ['key' => 'site_logo'],
+                ['value' => $logoPath, 'type' => 'image']
+            );
+        }
 
         // Update Hero Image
         if ($request->hasFile('hero_image')) {

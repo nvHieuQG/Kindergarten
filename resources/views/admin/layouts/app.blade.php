@@ -441,7 +441,7 @@
             <div class="nav-heading">Nội dung học tập</div>
             <a href="{{ route('admin.posts.index') }}"
                 class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
-                <i class="fas fa-clone"></i> Tin tức & Hoạt động
+                <i class="fas fa-clone"></i> Bài viết
             </a>
 
             <a href="{{ route('admin.categories.index') }}"

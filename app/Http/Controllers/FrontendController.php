@@ -45,7 +45,8 @@ class FrontendController extends Controller
         }
 
         $posts = $query->latest()->paginate(9);
-        return view('frontend.blog', compact('posts'));
+        $categories = \App\Models\Category::withCount('posts')->get();
+        return view('frontend.blog', compact('posts', 'categories'));
     }
 
     public function postDetail($slug)
@@ -56,8 +57,9 @@ class FrontendController extends Controller
         $post->increment('views');
 
         $recentPosts = Post::published()->where('id', '!=', $post->id)->latest()->take(3)->get();
+        $categories = \App\Models\Category::withCount('posts')->get();
 
-        return view('frontend.post-detail', compact('post', 'recentPosts'));
+        return view('frontend.post-detail', compact('post', 'recentPosts', 'categories'));
     }
 
     public function storeContact(ContactRequest $request)

@@ -4,13 +4,21 @@
         <nav class="navbar navbar-light navbar-expand-xl py-3">
             <!-- Logo -->
             <a href="{{ route('home') }}" class="navbar-brand d-flex align-items-center">
-                <div class="logo-icon bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
-                    style="width: 55px; height: 55px;">
-                    <i class="fas fa-sun text-white fa-2x"></i>
-                </div>
+                @if (isset($settings['site_logo']))
+                    <img src="{{ asset('storage/' . $settings['site_logo']) }}"
+                        alt="{{ $settings['site_name'] ?? 'Logo' }}" class="me-3"
+                        style="height: 55px; width: auto; max-width: 150px;">
+                @else
+                    <div class="logo-icon bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                        style="width: 55px; height: 55px;">
+                        <i class="fas fa-sun text-white fa-2x"></i>
+                    </div>
+                @endif
                 <div>
-                    <h1 class="text-primary h4 mb-0 fw-bold" style="letter-spacing: -0.5px;">Hoa Hướng Dương</h1>
-                    <small class="text-muted d-none d-lg-block" style="font-size: 12px;">Trường Mầm Non</small>
+                    <h1 class="text-primary h4 mb-0 fw-bold" style="letter-spacing: -0.5px;">
+                        {{ $settings['site_name'] ?? 'Hoa Hướng Dương' }}</h1>
+                    <small class="text-muted d-none d-lg-block"
+                        style="font-size: 12px;">{{ $settings['site_slogan'] ?? 'Trường Mầm Non' }}</small>
                 </div>
             </a>
 
@@ -58,8 +66,9 @@
                         </div>
                         <div>
                             <small class="text-muted d-block" style="font-size: 10px;">Hotline</small>
-                            <a href="tel:0967352874" class="text-dark fw-bold text-decoration-none"
-                                style="font-size: 14px;">0967352874</a>
+                            <a href="tel:{{ $settings['site_phone'] ?? '0967352874' }}"
+                                class="text-dark fw-bold text-decoration-none"
+                                style="font-size: 14px;">{{ $settings['site_phone'] ?? '0967352874' }}</a>
                         </div>
                     </div>
 
