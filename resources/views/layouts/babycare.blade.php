@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title', 'Hoa Hướng Dương - Trường Mầm Non Uy Tín')</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('sunflower.svg') }}">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="@yield('meta_keywords', 'trường mầm non, mẫu giáo, giáo dục mầm non, hoa hướng dương')" name="keywords">
     <meta content="@yield('meta_description', 'Trường Mầm Non Hoa Hướng Dương - Nơi ươm mầm tương lai, phát triển toàn diện cho trẻ')" name="description">
