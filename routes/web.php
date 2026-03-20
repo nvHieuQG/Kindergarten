@@ -20,6 +20,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/blog/{slug}', 'postDetail')->name('blog.show');
 
+    // Sitemap
+    Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
+
     // Form Submissions với Rate Limiting (5 requests/phút)
     Route::middleware(['throttle.form:5,1'])->group(function () {
         Route::post('/contact', 'storeContact')->name('contact.store');

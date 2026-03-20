@@ -1,6 +1,10 @@
 @extends('layouts.babycare')
 
 @section('title', $post->title . ' - Hoa Hướng Dương')
+@section('meta_description', Str::limit(strip_tags($post->excerpt ?? $post->content), 160))
+@section('og_type', 'article')
+@section('og_image', $post->featured_image ? asset('storage/' . $post->featured_image) :
+    asset('assets/img/og-default.jpg'))
 
 @section('content')
     <x-page-header :title="$post->title" active="Chi tiết bài viết" />
@@ -63,8 +67,8 @@
                         @endif
 
                         <!-- Post Content -->
-                        <div class="post-content fs-6 lh-lg text-dark mb-5">
-                            {!! $post->content !!}
+                        <div class="post-content fs-6 lh-lg text-dark mb-5 ck-content">
+                            {!! preg_replace('#http://(127\.0\.0\.1|localhost):8000#', '', $post->content) !!}
                         </div>
 
                         <!-- Tags & Share -->
@@ -112,7 +116,8 @@
                                         <a href="{{ route('blog.show', $recent->slug) }}" class="d-block position-relative"
                                             style="height: 200px;">
                                             <img src="{{ $recent->featured_image ? asset('storage/' . $recent->featured_image) : asset('assets/img/blog-1.jpg') }}"
-                                                class="img-fluid w-100 h-100 object-fit-cover" alt="{{ $recent->title }}">
+                                                class="img-fluid w-100 h-100 object-fit-cover" alt="{{ $recent->title }}"
+                                                loading="lazy">
                                         </a>
                                         <div class="p-3">
                                             <h6 class="fw-bold mb-1"><a href="{{ route('blog.show', $recent->slug) }}"
@@ -173,8 +178,8 @@
                                             class="flex-shrink-0 me-3 rounded-3 overflow-hidden"
                                             style="width: 80px; height: 80px;">
                                             <img src="{{ $recent->featured_image ? asset('storage/' . $recent->featured_image) : asset('assets/img/blog-1.jpg') }}"
-                                                class="img-fluid w-100 h-100 object-fit-cover"
-                                                alt="{{ $recent->title }}">
+                                                class="img-fluid w-100 h-100 object-fit-cover" alt="{{ $recent->title }}"
+                                                loading="lazy">
                                         </a>
                                         <div>
                                             <small class="text-muted d-block mb-1"><i class="far fa-clock me-1"></i>
@@ -215,11 +220,24 @@
             background-color: #f8fafc;
         }
 
+        .post-content {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
         .post-content img {
             max-width: 100%;
             height: auto;
             border-radius: 12px;
             margin: 24px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gắn CSS responsive cho các thẻ iframe (YouTube) */
+        .post-content iframe {
+            max-width: 100%;
+            border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 

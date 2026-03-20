@@ -27,66 +27,66 @@
     <div class="row g-4 mb-5">
         <!-- Posts Stats -->
         <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.1s">
-            <div class="stat-card">
+            <a href="{{ route('admin.posts.index') }}" class="stat-card text-decoration-none d-block">
                 <div class="stat-icon-wrapper bg-primary bg-opacity-10 text-primary">
                     <i class="fas fa-newspaper"></i>
                 </div>
                 <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Bài viết</div>
-                <h2 class="fw-bold mb-2">{{ $stats['total_posts'] }}</h2>
+                <h2 class="fw-bold mb-2 text-secondary">{{ $stats['total_posts'] }}</h2>
                 <div class="d-flex align-items-center">
                     <span
                         class="badge bg-success bg-opacity-10 text-success small border-0 me-2">{{ $stats['published_posts'] }}</span>
                     <span class="text-muted small">Đã xuất bản</span>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Teachers Stats -->
         <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.2s">
-            <div class="stat-card">
+            <a href="{{ route('admin.teachers.index') }}" class="stat-card text-decoration-none d-block">
                 <div class="stat-icon-wrapper bg-success bg-opacity-10 text-success">
                     <i class="fas fa-user-graduate"></i>
                 </div>
                 <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Giáo viên</div>
-                <h2 class="fw-bold mb-2">{{ $stats['total_teachers'] }}</h2>
+                <h2 class="fw-bold mb-2 text-secondary">{{ $stats['total_teachers'] }}</h2>
                 <div class="d-flex align-items-center">
                     <span
                         class="badge bg-success bg-opacity-10 text-success small border-0 me-2">{{ $stats['active_teachers'] }}</span>
                     <span class="text-muted small">Đang công tác</span>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Enrollments Stats -->
         <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.3s">
-            <div class="stat-card">
+            <a href="{{ route('admin.enrollments.index') }}" class="stat-card text-decoration-none d-block">
                 <div class="stat-icon-wrapper bg-warning bg-opacity-10 text-warning">
                     <i class="fas fa-id-card"></i>
                 </div>
                 <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Yêu cầu tư vấn</div>
-                <h2 class="fw-bold mb-2">{{ $stats['total_enrollments'] }}</h2>
+                <h2 class="fw-bold mb-2 text-secondary">{{ $stats['total_enrollments'] }}</h2>
                 <div class="d-flex align-items-center">
                     <span
                         class="badge bg-warning bg-opacity-10 text-warning small border-0 me-2">{{ $stats['pending_enrollments'] }}</span>
                     <span class="text-muted small">Đang chờ xử lý</span>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Contacts Stats -->
         <div class="col-md-6 col-lg-3 animate-up" style="animation-delay: 0.4s">
-            <div class="stat-card">
+            <a href="{{ route('admin.contacts.index') }}" class="stat-card text-decoration-none d-block">
                 <div class="stat-icon-wrapper bg-danger bg-opacity-10 text-danger">
                     <i class="fas fa-comment-dots"></i>
                 </div>
                 <div class="text-muted small fw-semibold text-uppercase letter-spacing-1 mb-1">Tin nhắn mới</div>
-                <h2 class="fw-bold mb-2">{{ $stats['unread_contacts'] }}</h2>
+                <h2 class="fw-bold mb-2 text-secondary">{{ $stats['unread_contacts'] }}</h2>
                 <div class="d-flex align-items-center">
                     <span
                         class="badge bg-danger bg-opacity-10 text-danger small border-0 me-2">{{ $stats['total_contacts'] }}</span>
                     <span class="text-muted small">Tổng số tin nhắn</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 

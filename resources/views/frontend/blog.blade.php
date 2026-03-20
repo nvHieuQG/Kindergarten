@@ -1,6 +1,7 @@
 @extends('layouts.babycare')
 
 @section('title', 'Tin tức - Hoa Hướng Dương')
+@section('meta_description', 'Cập nhật những hoạt động, tin tức và sự kiện nổi bật tại Trường Mầm Non Hoa Hướng Dương.')
 
 @section('content')
     <x-page-header title="Tin tức & Sự kiện" active="Tin tức" />
@@ -29,7 +30,7 @@
                                     <div class="blog-image-wrapper">
                                         <a href="{{ route('blog.show', $post->slug) }}">
                                             <img src="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('assets/img/blog-1.jpg') }}"
-                                                alt="{{ $post->title }}" class="blog-image">
+                                                alt="{{ $post->title }}" class="blog-image" loading="lazy">
                                         </a>
                                         <div class="category-tag">
                                             <i class="fas fa-tag me-1"></i>{{ $post->category->name ?? 'Tin tức' }}
@@ -65,7 +66,8 @@
                                         <!-- Author & Read More -->
                                         <div class="blog-footer">
                                             <div class="author-info-small">
-                                                <img src="{{ asset('assets/img/program-teacher.jpg') }}" alt="Author">
+                                                <img src="{{ asset('assets/img/program-teacher.jpg') }}"
+                                                    alt="{{ $post->user->name ?? 'Tác giả' }}" loading="lazy">
                                                 <span>{{ $post->user->name ?? 'Admin' }}</span>
                                             </div>
                                             <a href="{{ route('blog.show', $post->slug) }}" class="read-more-link">
@@ -89,7 +91,7 @@
                     <!-- Pagination -->
                     @if ($posts->hasPages())
                         <div class="mt-5 d-flex justify-content-center">
-                            {{ $posts->links() }}
+                            {{ $posts->links('pagination::bootstrap-5') }}
                         </div>
                     @endif
                 </div>
@@ -142,11 +144,11 @@
                             <i class="fas fa-fire me-2"></i>Bài viết phổ biến
                         </h5>
                         <div class="popular-posts">
-                            @foreach (\App\Models\Post::published()->orderBy('views', 'desc')->take(5)->get() as $popularPost)
+                            @foreach ($popularPosts as $popularPost)
                                 <div class="popular-post-item">
                                     <a href="{{ route('blog.show', $popularPost->slug) }}" class="popular-post-image">
                                         <img src="{{ $popularPost->featured_image ? asset('storage/' . $popularPost->featured_image) : asset('assets/img/blog-1.jpg') }}"
-                                            alt="{{ $popularPost->title }}">
+                                            alt="{{ $popularPost->title }}" loading="lazy">
                                     </a>
                                     <div class="popular-post-content">
                                         <a href="{{ route('blog.show', $popularPost->slug) }}" class="popular-post-title">

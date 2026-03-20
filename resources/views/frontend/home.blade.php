@@ -1,6 +1,8 @@
 @extends('layouts.babycare')
 
 @section('title', 'Trang chủ - Hoa Hướng Dương')
+@section('meta_description', 'Trường Mầm Non Hoa Hướng Dương - Nơi ươm mầm tương lai, chương trình giáo dục chuẩn quốc
+    tế, giáo viên tận tâm.')
 
 @section('content')
     <!-- Hero Start -->
@@ -281,7 +283,7 @@
                         <div class="blog-card h-100">
                             <div class="blog-img">
                                 <img src="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('assets/img/blog-1.jpg') }}"
-                                    alt="{{ $post->title }}">
+                                    alt="{{ $post->title }}" loading="lazy">
                                 <div class="category-badge">{{ $post->category->name ?? 'Tin tức' }}</div>
                             </div>
                             <div class="blog-content">
@@ -291,7 +293,7 @@
 
                                 <div class="author-info">
                                     <img src="{{ asset('assets/img/program-teacher.jpg') }}" class="author-img"
-                                        alt="Admin">
+                                        alt="{{ $post->user->name ?? 'Tác giả' }}" loading="lazy">
                                     <div>
                                         <h6 class="author-name">{{ $post->user->name ?? 'Admin' }}</h6>
                                         <small class="text-muted">{{ $post->created_at->format('d/m/Y') }}</small>
@@ -494,6 +496,20 @@
                                     aria-label="Close"></button>
                             </div>
                         @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 border-start border-danger border-4 rounded-3 mb-4"
+                                role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-exclamation-circle fs-4 me-3 text-danger"></i>
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Gửi thất bại!</h6>
+                                        <small>{{ session('error') }}</small>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="mb-4 text-center">
                             <h4 class="fw-bold text-secondary">Gửi tin nhắn tư vấn</h4>
                             <p class="text-muted small">Chúng tôi sẽ phản hồi trong vòng 24 giờ</p>
@@ -552,7 +568,7 @@
                     } else if (url.includes('youtu.be/')) {
                         videoId = url.split('youtu.be/')[1].split('?')[0];
                     } else if (url.includes('youtube.com/embed/')) {
-                        return url; // Đã đúng định dạng
+                        return url;
                     }
 
                     return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0` : url;
@@ -562,165 +578,128 @@
                     btn.addEventListener('click', function() {
                         const rawUrl = this.getAttribute('data-src');
                         videoIframe.setAttribute('src', getEmbedUrl(rawUrl));
-
-                        // Fix aria-hidden error: Loại bỏ khi hiển thị
                         videoModal.removeAttribute('aria-hidden');
                     });
                 });
 
-                // Clear video when modal closed
                 videoModal.addEventListener('hide.bs.modal', function() {
                     videoIframe.setAttribute('src', '');
-                    // Khôi phục aria-hidden nếu cần khi đóng (Bootstrap tự quản lý thường tốt hơn)
                 });
 
-                // Smooth scroll for anchor links
-                const scrollLinks = document.querySelectorAll('.scroll-link');
-                // ... (phần code smooth scroll giữ nguyên bên dưới)
+                // Smooth scroll is handled globally in babycare.blade.php (jQuery)
+                // Hash-based scroll on load
+                if (window.location.hash) {
+                    setTimeout(() => {
+                        const targetElement = document.querySelector(window.location.hash);
+                        if (targetElement) {
+                            const navbarHeight = document.querySelector('.navbar').offsetHeight || 100;
+                            const targetPosition = targetElement.offsetTop - navbarHeight;
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 100);
+                }
+
+                // Enrollment Form Validation
+                const form = document.querySelector('form[action="{{ route('enrollment.store') }}"]');
+                if (form) {
+                    const inputs = {
+                        parentName: document.getElementById('floatingParentName'),
+                        phone: document.getElementById('floatingPhone'),
+                        childName: document.getElementById('floatingChildName'),
+                        dobYear: document.getElementById('floatingDobYear')
+                    };
+
+                    const currentYear = new Date().getFullYear();
+
+                    // Validation Rules
+                    const validators = {
+                        parentName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên phụ huynh.',
+                        childName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên bé.',
+                        phone: (value) => {
+                            if (!value) return 'Vui lòng nhập số điện thoại.';
+                            const regex = /^(0)[0-9]{9}$/;
+                            return regex.test(value) ? null :
+                                'Số điện thoại phải có 10 số và bắt đầu bằng số 0.';
+                        },
+                        dobYear: (value) => {
+                            if (!value) return 'Vui lòng nhập năm sinh.';
+                            const year = parseInt(value);
+                            if (isNaN(year) || year < 2018 || year > currentYear) {
+                                return `Năm sinh phải từ 2018 đến ${currentYear}.`;
+                            }
+                            return null;
+                        }
+                    };
+
+                    // UI Helpers
+                    const showError = (input, message) => {
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+
+                        let feedback = input.parentNode.querySelector('.invalid-feedback');
+                        if (!feedback) {
+                            feedback = document.createElement('div');
+                            feedback.className = 'invalid-feedback';
+                            input.parentNode.appendChild(feedback);
+                        }
+                        feedback.innerHTML = `<i class="fas fa-exclamation-circle me-1 small"></i>${message}`;
+                    };
+
+                    const showSuccess = (input) => {
+                        input.classList.remove('is-invalid');
+                        input.classList.remove('is-valid');
+
+                        const feedback = input.parentNode.querySelector('.invalid-feedback');
+                        if (feedback) {
+                            feedback.textContent = '';
+                        }
+                    };
+
+                    const validateInput = (key) => {
+                        const input = inputs[key];
+                        if (!input) return true;
+
+                        const error = validators[key](input.value);
+                        if (error) {
+                            showError(input, error);
+                            return false;
+                        } else {
+                            showSuccess(input);
+                            return true;
+                        }
+                    };
+
+                    // Attach Events
+                    Object.keys(inputs).forEach(key => {
+                        const input = inputs[key];
+                        if (input) {
+                            input.addEventListener('blur', () => validateInput(key));
+                            input.addEventListener('input', () => {
+                                if (input.classList.contains('is-invalid')) {
+                                    validateInput(key);
+                                }
+                            });
+                        }
+                    });
+
+                    // Form Submit
+                    form.addEventListener('submit', function(e) {
+                        let isValid = true;
+                        Object.keys(inputs).forEach(key => {
+                            if (!validateInput(key)) {
+                                isValid = false;
+                            }
+                        });
+
+                        if (!isValid) {
+                            e.preventDefault();
+                        }
+                    });
+                }
             });
         </script>
-        scrollLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-
-        if (href && href.startsWith('#')) {
-        e.preventDefault();
-
-        const targetId = href.substring(1);
-        const targetElement = document.getElementById(targetId);
-
-        if (targetElement) {
-        const navbarHeight = document.querySelector('.navbar').offsetHeight ||
-        100;
-        const targetPosition = targetElement.offsetTop - navbarHeight;
-
-        window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-        });
-
-        const navbarCollapse = document.getElementById('navbarCollapse');
-        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-        navbarCollapse.classList.remove('show');
-        }
-        }
-        }
-        });
-        });
-
-        if (window.location.hash) {
-        setTimeout(() => {
-        const targetElement = document.querySelector(window.location.hash);
-        if (targetElement) {
-        const navbarHeight = document.querySelector('.navbar').offsetHeight || 100;
-        const targetPosition = targetElement.offsetTop - navbarHeight;
-        window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-        });
-        }
-        }, 100);
-        }
-
-        // Enrollment Form Validation
-        const form = document.querySelector('form[action="{{ route('enrollment.store') }}"]');
-        if (form) {
-        const inputs = {
-        parentName: document.getElementById('floatingParentName'),
-        phone: document.getElementById('floatingPhone'),
-        childName: document.getElementById('floatingChildName'),
-        dobYear: document.getElementById('floatingDobYear')
-        };
-
-        const currentYear = new Date().getFullYear();
-
-        // Validation Rules
-        const validators = {
-        parentName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên phụ huynh.',
-        childName: (value) => value.trim().length > 0 ? null : 'Vui lòng nhập họ tên bé.',
-        phone: (value) => {
-        if (!value) return 'Vui lòng nhập số điện thoại.';
-        const regex = /^(0)[0-9]{9}$/;
-        return regex.test(value) ? null :
-        'Số điện thoại phải có 10 số và bắt đầu bằng số 0.';
-        },
-        dobYear: (value) => {
-        if (!value) return 'Vui lòng nhập năm sinh.';
-        const year = parseInt(value);
-        if (isNaN(year) || year < 2018 || year> currentYear) {
-            return `Năm sinh phải từ 2018 đến ${currentYear}.`;
-            }
-            return null;
-            }
-            };
-
-            // UI Helpers
-            const showError = (input, message) => {
-            input.classList.add('is-invalid');
-            input.classList.remove('is-valid');
-
-            // Find or create invalid-feedback div
-            let feedback = input.parentNode.querySelector('.invalid-feedback');
-            if (!feedback) {
-            feedback = document.createElement('div');
-            feedback.className = 'invalid-feedback';
-            input.parentNode.appendChild(feedback);
-            }
-            feedback.innerHTML = `<i class="fas fa-exclamation-circle me-1 small"></i>${message}`;
-            };
-
-            const showSuccess = (input) => {
-            input.classList.remove('is-invalid');
-            input.classList.remove('is-valid');
-
-            const feedback = input.parentNode.querySelector('.invalid-feedback');
-            if (feedback) {
-            feedback.textContent = '';
-            }
-            };
-
-            const validateInput = (key) => {
-            const input = inputs[key];
-            if (!input) return true;
-
-            const error = validators[key](input.value);
-            if (error) {
-            showError(input, error);
-            return false;
-            } else {
-            showSuccess(input);
-            return true;
-            }
-            };
-
-            // Attach Events
-            Object.keys(inputs).forEach(key => {
-            const input = inputs[key];
-            if (input) {
-            input.addEventListener('blur', () => validateInput(key));
-            input.addEventListener('input', () => {
-            if (input.classList.contains('is-invalid')) {
-            validateInput(key);
-            }
-            });
-            }
-            });
-
-            // Form Submit
-            form.addEventListener('submit', function(e) {
-            let isValid = true;
-            Object.keys(inputs).forEach(key => {
-            if (!validateInput(key)) {
-            isValid = false;
-            }
-            });
-
-            if (!isValid) {
-            e.preventDefault();
-            }
-            });
-            }
-            });
-            </script>
-        @endpush
-    @endsection
+    @endpush
+@endsection

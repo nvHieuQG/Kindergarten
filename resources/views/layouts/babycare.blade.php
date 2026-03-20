@@ -8,6 +8,26 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="@yield('meta_keywords', 'trường mầm non, mẫu giáo, giáo dục mầm non, hoa hướng dương')" name="keywords">
     <meta content="@yield('meta_description', 'Trường Mầm Non Hoa Hướng Dương - Nơi ươm mầm tương lai, phát triển toàn diện cho trẻ')" name="description">
+    <meta name="robots" content="index, follow">
+
+    {{-- Open Graph (Facebook, Zalo, LinkedIn) --}}
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('title', 'Hoa Hướng Dương - Trường Mầm Non Uy Tín')">
+    <meta property="og:description" content="@yield('meta_description', 'Trường Mầm Non Hoa Hướng Dương - Nơi ươm mầm tương lai, phát triển toàn diện cho trẻ')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="@yield('og_image', asset('assets/img/hero-img.jpg'))">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Hoa Hướng Dương">
+    <meta property="og:locale" content="vi_VN">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'Hoa Hướng Dương - Trường Mầm Non Uy Tín')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Trường Mầm Non Hoa Hướng Dương - Nơi ươm mầm tương lai, phát triển toàn diện cho trẻ')">
+    <meta name="twitter:image" content="@yield('og_image', asset('assets/img/hero-img.jpg'))">
+
+    @stack('meta')
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

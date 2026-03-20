@@ -23,7 +23,8 @@
             </a>
 
             <!-- Mobile Toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Mở/đóng menu">
                 <span class="fa fa-bars text-primary"></span>
             </button>
 
